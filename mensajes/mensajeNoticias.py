@@ -30,8 +30,7 @@ def extraer_con_perfil(url, perfil_path):
     return resultados
 
 def generar_noticia_mercado():
-    # fecha = time.strftime("%Y/%m/%d/")
-    fecha = "2025/05/29/"
+    fecha = time.strftime("%Y/%m/%d/")
     query = f"site:cnbc.com {fecha} stocks making the biggest moves premarket"
 
     from googlesearch import search

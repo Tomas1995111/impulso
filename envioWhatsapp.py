@@ -11,14 +11,17 @@ from mensajes.mensajeAlertaCompra import generar_alerta_aleatoria
 nombre_grupo = "I22BQXw1eO45eh2ee83WuZ"
 
 mensajes_semana = [
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:00", "mensaje": "noticia_mercado"},
-    {"dias": ["monday"], "hora": "00:19", "mensaje": "¡Hora de caucionar!"},
-    {"dias": ["monday", "thursday", "friday"], "hora": "00:20", "mensaje": "alerta_bursatil"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "00:22", "mensaje": "cotizacion_dolar"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "10:55", "mensaje": "noticia_mercado"},
+    {"dias": ["friday"], "hora": "13:30", "mensaje": "💰 ¡No te olvides de caucionar lo líquido este finde semana!"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:00", "mensaje": "alerta_bursatil"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:05", "mensaje": "alerta_bursatil"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:10", "mensaje": "alerta_bursatil"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:20", "mensaje": "alerta_bursatil"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "15:00", "mensaje": "cotizacion_dolar"},
 ]
 
 mensajes_fecha = [
-    {"fecha": "02/06/2025 00:24", "mensaje": "Mensaje especial para el 2 de junio a las 13:25"},
+    {"fecha": "02/06/2025 01:08", "mensaje": "Mensaje especial .........."},
 ]
 
 def enviar_mensaje(texto):

@@ -16,7 +16,9 @@ tickers_top = [
     "CSCO", "PEP", "MCD", "DIS", "NKE",
     "BA", "GS", "UPS", "CAT", "CVX",
     "IBM", "GE", "ADBE", "HON", "MDT",
-    "UNH", "PFE"
+    "UNH", "PFE", "BABA", "BKNG", "SBUX",
+    "TXN", "LMT", "GILD", "BLK", "NOW", "CSX",
+    "QCOM"
 ]
 
 def obtener_datos_accion(ticker):
