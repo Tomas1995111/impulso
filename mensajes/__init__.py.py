@@ -1,0 +1,3 @@
+from .mensajeCotizacionesDolar import generar_cotizacion_dolar
+from .mensajeNoticias import generar_noticia_mercado
+from .mensajeAlertaCompra import generar_alerta_aleatoria

@@ -1,0 +1,42 @@
+# Ignorar cachés y archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+.venv/
+env/
+venv/
+
+# Archivos de sistema de Windows
+Thumbs.db
+Desktop.ini
+
+# Chromedriver (podés ignorar si no querés subirlo)
+chromedriver.exe
+
+# Archivos temporales y logs
+*.log
+*.tmp
+
+# Archivos de configuración del editor
+.vscode/
+.idea/
+
+# Archivo de base de datos local o archivos de datos
+PyWhatKit_DB.txt
+
+# Archivos de caché de pyautogui o similares
+*.cache
+
+# Archivos de sistema OneDrive o similares
+~$*
+
+# Archivos de MacOS (por si alguna vez usas Mac)
+.DS_Store
+
+# Carpeta con notas de archivos, minicodigo y test
+extras/
+
+# Perfiles de chrome
+PerfilesChrome/
