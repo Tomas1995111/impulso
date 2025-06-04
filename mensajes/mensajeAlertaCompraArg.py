@@ -3,29 +3,17 @@ import yfinance as yf
 import random
 import math
 
-tickers_top = ['NOW', 'SHW', 'COST', 'AZO', 'SNPS', 
- 'META', 'LMT', 'CAT', 'TMO', 'UNH', 
- 'DE', 'ADSK', 'IBM', 'JPM', 'AAPL', 
- 'UNP', 'HD', 'BLK', 'PNC', 'FDX', 
- 'NSC', 'AMZN', 'BRK-B', 'TMUS', 'CRM', 
- 'MAR', 'RSG', 'EXPE', 'AXP', 'QCOM', 
- 'LOW', 'GE', 'CVX', 'RL', 'VST', 'LIN', 
- 'CMI', 'ACN', 'MCD', 'MSFT', 'DIS', 
- 'JNJ', 'AMGN', 'HON', 'PG', 'MMM', 
- 'BA', 'NVDA', 'KO', 'V', 'WMT', 
- 'VZ', 'GS', 'NKE', 'CSCO', 'MRK', 
- 'NFLX', 'ASML', 'REGN', 'KLAC', 'BKNG', 
- 'MELI', 'MDB', 'MSTR', 'ZS', 'AMD', 
- 'AVGO', 'GILD', 'TXN', 'TSLA', 'GOOG', 
- 'ROST', 'TTWO', 'WDAY', 'PLTR', 'CEG', 
- 'MU', 'LLY', 'MCK', 'GOOGL', 'TSM', 
- 'MA', 'ORCL', 'XOM', 'SAP', 'BAC', 
- 'ABBV', 'SPY', 'QQQ', 'DIA', 'IWM', 
- 'VTI', 'VEA', 'VWO', 'TLT', 'GLD', 
- 'XLF', 'XLE', 'XLV', 'XLK', 'XLY', 
- 'XLU', 'INTC', 'PEP', 'UPS', 'ADBE', 
- 'MDT', 'PFE', 'BABA', 'SBUX', 'CSX'
- ]
+tickers_arg = [
+    "GGAL.BA", "YPFD.BA", "BMA.BA", "BBAR.BA", "PAMP.BA",
+    "TGSU2.BA", "TXAR.BA", "SUPV.BA", "COME.BA", "BYMA.BA",
+    "CEPU.BA", "ALUA.BA", "TRAN.BA", "LOMA.BA", "EDN.BA",
+    "VALO.BA", "METR.BA", "IRSA.BA", "TECO2.BA", "TGNO4.BA",
+    "CRES.BA", "MIRG.BA", "BOLT.BA", "AUSO.BA", "SAMI.BA", 
+    "MOLI.BA", "RICH.BA", "LEDE.BA", "CVH.BA", "BPAT.BA", 
+    "DGCU2.BA", "BHIP.BA", "CELU.BA", "AGRO.BA", "PATA.BA",
+    "CECO2.BA", "A3.BA", "GRIM.BA", "MORI.BA", "HARG.BA",
+    "GBAN.BA", "CGPA2.BA",    
+]
 
 def obtener_datos_accion(ticker):
     accion = yf.Ticker(ticker)
@@ -53,7 +41,12 @@ def generar_alerta(datos):
     max_historico = datos["max_historico"]
     recomendacion = datos["recomendacion"]
 
-    if recomendacion in ["buy", "strongBuy"] and precio_actual < 0.8 * max_historico:
+    # Si no hay recomendacion, considerarla como "buy"
+    if recomendacion is None or recomendacion.lower() == "none":
+        recomendacion = "buy"
+
+    # Aceptar "buy", "strong_buy" y "strongBuy" (por precaución)
+    if recomendacion.lower() in ["buy", "strong_buy", "strongbuy"] and precio_actual < 0.8 * max_historico:
         PE = math.floor(precio_actual)
         SL_pct = -random.uniform(6, 14) / 100
         SL = math.floor(PE * (1 + SL_pct))
@@ -66,10 +59,10 @@ def generar_alerta(datos):
         mensaje = f"""
 📢 *ALERTA ANÁLISIS* // ESPECULATIVO 
 👉🏼 Perfil Agresivo❗
-•Ticker: *{datos['ticker']}* ({datos['nombre']}) 🇦🇷🇺🇸
-•Zona de compra: {PE} USD
+•Ticker: *{datos['ticker']}* ({datos['nombre']}) 🇦🇷
+•Zona de compra: {PE} ARS
 ⛔ STOP LOSS = *{round(SL_pct * 100)}%*
-✅ DESARMES: ( {TP1} USD / {TP2} USD / {TP3} USD )
+✅ DESARMES: ( {TP1} ARS / {TP2} ARS / {TP3} ARS )
 - - - - - - - - - - - - - - - - - - - - - - 
 Recuerde operar bajo su propio riesgo y en la justa y considerada proporción de su cartera. (la misma no configura ninguna recomendación)
 """
@@ -77,12 +70,12 @@ Recuerde operar bajo su propio riesgo y en la justa y considerada proporción de
     else:
         return None
 
-def generar_alerta_aleatoria():
+def generar_alerta_aleatoria_arg():
     """Busca en la lista tickers_top alguna acción que cumpla y devuelve mensaje o None."""
     import random
     import time
 
-    tickers_restantes = tickers_top.copy()
+    tickers_restantes = tickers_arg.copy()
     random.shuffle(tickers_restantes)
 
     for ticker in tickers_restantes:
@@ -98,7 +91,7 @@ def generar_alerta_aleatoria():
 
 # Si quieres probar el script directamente
 if __name__ == "__main__":
-    alerta = generar_alerta_aleatoria()
+    alerta = generar_alerta_aleatoria_arg()
     if alerta:
         print(alerta)
     else:

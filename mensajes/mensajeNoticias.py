@@ -29,25 +29,35 @@ def extraer_con_perfil(url, perfil_path):
     driver.quit()
     return resultados
 
+def buscar_url_noticia():
+    fecha = time.strftime("%Y/%m/%d")
+    fecha = "2025/05/30"
+    query = f"site:cnbc.com {fecha} stocks making the biggest premarket"
+    
+    for url in search(query, num_results=15):
+        if (
+            f"cnbc.com/{fecha}" in url and
+            "stocks-making-the-biggest" in url and
+            "premarket" in url and
+            "midday" not in url and
+            "after-hours" not in url
+        ):
+            print(f"URL encontrada: {url}")
+            return url
+
+    print("No se encontró el artículo")
+    return None
+
 def generar_noticia_mercado():
-    fecha = time.strftime("%Y/%m/%d/")
-    query = f"site:cnbc.com {fecha} stocks making the biggest moves premarket"
-
-    from googlesearch import search
-    url_encontrada = None
-    for url in search(query, num_results=5):
-        if f"cnbc.com/{fecha}stocks-making-the-biggest-moves-premarket" in url:
-            url_encontrada = url
-            break
-
-    if not url_encontrada:
-        return "No se encontró el artículo de CNBC de hoy."
+    url = buscar_url_noticia()
+    if not url:
+        return ""
 
     perfil1 = r"C:\Users\Tomas\OneDrive\Escritorio\impulso_wsp_bot\PerfilesChrome\ChromeProfile_Normal"
     perfil2 = r"C:\Users\Tomas\OneDrive\Escritorio\impulso_wsp_bot\PerfilesChrome\ChromeProfile_Traductor"
 
-    resultados_ingles = extraer_con_perfil(url_encontrada, perfil1)
-    resultados_traducido = extraer_con_perfil(url_encontrada, perfil2)
+    resultados_ingles = extraer_con_perfil(url, perfil1)
+    resultados_traducido = extraer_con_perfil(url, perfil2)
 
     mensaje = "📊 *Muy buenos días Impuslores, les dejamos los mayores movimientos de acciones del día de hoy:* 📊\n\n"
     for i, (titulo, _) in enumerate(resultados_ingles):
