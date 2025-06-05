@@ -1,4 +1,4 @@
-# mensajeNoticias.py
+# mensajeResumen.py
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -29,12 +29,11 @@ def extraer_con_perfil(url, perfil_path):
     driver.quit()
     return resultados
 
-def buscar_url_noticia():
+def buscar_url_resumen():
     fecha = time.strftime("%Y/%m/%d")
-    fecha = "2025/05/30"
     query = f"site:cnbc.com {fecha} stocks making the biggest premarket"
     
-    for url in search(query, num_results=15):
+    for url in search(query, num_results=10):
         if (
             f"cnbc.com/{fecha}" in url and
             "stocks-making-the-biggest" in url and
@@ -48,8 +47,19 @@ def buscar_url_noticia():
     print("No se encontró el artículo")
     return None
 
-def generar_noticia_mercado():
-    url = buscar_url_noticia()
+def esperar_y_buscar_url(max_espera_min=120, intervalo_min=5): #intervalo_min
+    inicio = time.time()
+    while (time.time() - inicio) < max_espera_min * 60:
+        url = buscar_url_resumen()
+        if url:
+            return url
+        print(f"No se encontró. Reintentando en {intervalo_min} minutos...\n")
+        time.sleep(intervalo_min * 60)
+    print("⏳ Tiempo máximo de espera alcanzado. No se encontró la URL.")
+    return None
+
+def generar_mensaje_resumen():
+    url = esperar_y_buscar_url()  # Reintenta hasta 2 horas, cada 5 minutos
     if not url:
         return ""
 
