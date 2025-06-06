@@ -1,14 +1,17 @@
-#envioWhatsapp.py
+# envioWhatsapp.py
 import pywhatkit
 import pyautogui
 import pyperclip
 import datetime
 import ctypes
 import time
+import subprocess
+import os
 from mensajes.mensajeCotizacionesDolar import generar_cotizacion_dolar
 from mensajes.mensajeResumen import generar_mensaje_resumen
 from mensajes.mensajeAlertaCompra import generar_alerta_aleatoria
 from mensajes.mensajeAlertaCompraArg import generar_alerta_aleatoria_arg
+from registros.reporteAlertas import generar_resumen_alertas, seleccionar_y_copiar_excel
 
 ES_CONTINUOUS = 0x80000000
 ES_SYSTEM_REQUIRED = 0x00000001
@@ -19,17 +22,18 @@ ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRE
 nombre_grupo = "I22BQXw1eO45eh2ee83WuZ"
 
 mensajes_semana = [
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:00", "mensaje": "noticia_mercado"},
-    {"dias": ["thursday", "friday"], "hora": "13:30", "mensaje": "💰 ¡No te olvides de caucionar lo líquido este finde semana!"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:02", "mensaje": "alerta_bursatil"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:04", "mensaje": "alerta_bursatil"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:06", "mensaje": "alerta_bursatil_arg"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:08", "mensaje": "alerta_bursatil_arg"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "15:00", "mensaje": "cotizacion_dolar"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "10:15", "mensaje": "noticia_mercado"},
+    {"dias": ["friday"], "hora": "10:17", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "10:18", "mensaje": "alerta_bursatil"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "10:21", "mensaje": "alerta_bursatil"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "10:24", "mensaje": "alerta_bursatil_arg"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "10:27", "mensaje": "alerta_bursatil_arg"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "10:30", "mensaje": "cotizacion_dolar"},
+    {"dias": ["friday"], "hora": "10:33", "mensaje": "resumenAlertas"},
 ]
 
 mensajes_fecha = [
-    {"fecha": "13/06/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 17/06 la Bolsa de Buenos Aires estará cerrada por el feriado en conmemoración del Gral. Güemes."},
+    {"fecha": "06/06/2025 10:36", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 17/06 la Bolsa de Buenos Aires estará cerrada por el feriado en conmemoración del Gral. Güemes."},
     {"fecha": "18/06/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El jueves 19/06 la Bolsa de Nueva York estará cerrada por Juneteenth.\nEl viernes 20/06 la Bolsa de Buenos Aires estará cerrada por el Paso a la Inmortalidad del Gral.  Belgrano."},
     {"fecha": "02/07/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El jueves 03/07 la Bolsa de Nueva York cerrará temprano a las 13:00 por el Día de Independencia.\nEl viernes 04/07 estará cerrada por el mismo motivo."},
     {"fecha": "08/07/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 09/06 la Bolsa de Buenos Aires estará cerrada por el feriado del Día de la Independencia."},
@@ -39,7 +43,7 @@ mensajes_fecha = [
     {"fecha": "26/11/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El jueves 27/11 la Bolsa de Nueva York estará cerrada por el Día de Acción de Gracias.\nEl viernes 28/11 cerrará temprano a las 13:00 por el mismo motivo."},
     {"fecha": "05/12/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 08/12 la Bolsa de Buenos Aires estará cerrada por el feriado de la Inmaculada Concepción."},
     {"fecha": "23/12/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El martes 24/12 la Bolsa de Nueva York cerrará temprano a las 13:00 hs por la víspera de Navidad.\n""El miércoles 25/12 Las Bolsas de Nueva York y Buenos Aires permanecerán cerradas por el feriado de Navidad."},
-    {"fecha": "19/06/2025 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 20/06, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 19/06) a las 15:30 hs y ejercerse en cualquier momento."},
+    {"fecha": "06/06/2025 10:38", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 20/06, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 19/06) a las 15:30 hs y ejercerse en cualquier momento."},
     {"fecha": "17/07/2025 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 18/07, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 17/07) a las 15:30 hs y ejercerse en cualquier momento."},
     {"fecha": "14/08/2025 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 15/08, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 14/08) a las 15:30 hs y ejercerse en cualquier momento."},
     {"fecha": "18/09/2025 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 19/09, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 18/09) a las 15:30 hs y ejercerse en cualquier momento."}, 
@@ -63,8 +67,7 @@ mensajes_fecha = [
     {"fecha": "18/03/2027 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 19/03, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 18/03) a las 15:30 hs y ejercerse en cualquier momento."},
     {"fecha": "15/04/2027 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 16/04, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 15/04) a las 15:30 hs y ejercerse en cualquier momento."},
     {"fecha": "20/05/2027 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 21/05, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 20/05) a las 15:30 hs y ejercerse en cualquier momento."},
-    {"fecha": "05/06/2025 14:30", "mensaje": "📚 *Jueves de educación financiera*\n🧠 *Mini clase: ¿Qué es un ETF?*\n\nHola Impulsores! les dejamos una explicación breve y clave 👇\n\n🔹 *¿Qué es un ETF?*\nEs un fondo que agrupa muchas acciones o activos (como el S&P 500, bonos, materias primas, etc.) y se compra como si fuera una acción individual.\n\n✅ *Permiten invertir en índices, sectores o regiones*\n✅ *Tienen baja comisión y alta liquidez*\n✅ *Podés acceder a una cartera diversificada en una sola operación*\n✅ *Se operan como cualquier acción, en tiempo real*\n\n📊 *Ideal para diversificar y seguir una estrategia sin elegir activos uno por uno.*"},
-    {"fecha": "11/06/2025 14:30", "mensaje": "📚 *Miércoles de educación financiera*\n🧠 *Mini clase: ¿Qué es una acción?*\n\nHola Impulsores! Como todos los miércoles, les dejamos una *explicación breve y clave* 👇\n\n🔹 *¿Qué es una acción?*\n*Es una parte de propiedad de una empresa* que podés comprar y vender en la bolsa.\n\n✅ *Ser dueño de una acción significa ser socio de la empresa*\n✅ *Podés ganar plata si la empresa crece y su valor sube*\n✅ *Algunas acciones pagan dividendos* (ganancias distribuidas)\n✅ *Se negocian en mercados organizados* y su precio varía según oferta y demanda\n\n*📊 Ideal para quienes buscan crecimiento y participar en el éxito de las empresas.*"},
+    {"fecha": "06/06/2025 10:40", "mensaje": "📚 *Miércoles de educación financiera*\n🧠 *Mini clase: ¿Qué es un ETF?*\n\nHola Impulsores! Como todos los miércoles, les dejamos una explicación breve y clave 👇\n\n🔹 *¿Qué es un ETF?*\nEs un fondo que agrupa muchas acciones o activos (como el S&P 500, bonos, materias primas, etc.) y se compra como si fuera una acción individual.\n\n✅ *Permiten invertir en índices, sectores o regiones*\n✅ *Tienen baja comisión y alta liquidez*\n✅ *Podés acceder a una cartera diversificada en una sola operación*\n✅ *Se operan como cualquier acción, en tiempo real*\n\n📊 *Ideal para diversificar y seguir una estrategia sin elegir activos uno por uno.*"},
     {"fecha": "18/06/2025 14:30", "mensaje": "📚 *Miércoles de educación financiera*\n🧠 *Mini clase: ¿Qué es la tasa de interés?*\n\nHola Impulsores! Como todos los miércoles, les dejamos una explicación breve y clave 👇\n\n🔹 ¿Qué es la tasa de interés?\nEs el porcentaje que se paga por prestar dinero o el rendimiento que genera una inversión.\n\n✅ Afecta préstamos, ahorros e inversiones\n✅ Una tasa alta puede incentivar el ahorro y encarecer créditos\n✅ Una tasa baja puede estimular el consumo y la inversión\n✅ Clave para entender cómo funciona la economía\n\n*📊 Ideal para saber cómo impacta en tus finanzas personales e inversiones.*"},
     {"fecha": "25/06/2025 14:30", "mensaje": "📚 *Miércoles de educación financiera*\n🧠 *Mini clase: ¿Qué es un bono?*\n\nHola Impulsores! Como todos los miércoles, les dejamos una explicación breve y clave 👇\n\n🔹 ¿Qué es un bono?\nEs un título de deuda que emite un gobierno o empresa para pedir plata prestada y, a cambio, paga intereses periódicos.\n\n✅ Recibís pagos de interés fijos o variables\n✅ Al vencimiento, te devuelven el capital invertido\n✅ Son una opción más segura que las acciones\n✅ Se usan para diversificar y generar ingresos estables\n\n*📊 Ideal para quienes buscan menor riesgo y rendimientos predecibles.*"},
     {"fecha": "02/07/2025 14:30", "mensaje": "📚 *Miércoles de educación financiera*\n🧠 *Mini clase: ¿Qué es la diversificación?*\n\nHola Impulsores! Como todos los miércoles, les dejamos una explicación breve y clave 👇\n\n🔹 ¿Qué es la diversificación?\nEs repartir tus inversiones en diferentes activos para reducir riesgos.\n\n✅ No poner todos los huevos en la misma canasta\n✅ Protege tu dinero de caídas fuertes en un activo\n✅ Mejora la estabilidad y el rendimiento a largo plazo\n✅ Clave para una estrategia de inversión segura\n\n*📊 Ideal para minimizar riesgos y maximizar oportunidades.*"},
@@ -94,18 +97,62 @@ mensajes_fecha = [
     {"fecha": "26/11/2025 14:30", "mensaje": "📚 *Miércoles de educación financiera*\n🧠 *Mini clase: ¿Qué es un ETF inverso o apalancado?*\n\nHola Impulsores! Como todos los miércoles, les dejamos una explicación breve y clave 👇\n\n🔹 ¿Qué es un ETF inverso?\nEs un fondo que busca ganar cuando el mercado baja, invirtiendo en la dirección contraria.\n\n🔹 ¿Qué es un ETF apalancado?\nEs un fondo que usa deuda para multiplicar las ganancias (y pérdidas) en relación al mercado.\n\n✅ Ambos son instrumentos avanzados\n✅ Tienen más riesgo y volatilidad\n✅ Requieren conocimientos y seguimiento constante\n✅ No son recomendados para principiantes\n\n*📊 Ideal para entender riesgos si querés explorar inversiones más complejas.*"},
     {"fecha": "03/12/2025 14:30", "mensaje": "📚 *Miércoles de educación financiera*\n🧠 *Mini clase: ¿Qué es el spread en la bolsa?*\n\nHola Impulsores! Como todos los miércoles, les dejamos una explicación breve y clave 👇\n\n🔹 ¿Qué es el spread?\nEs la diferencia entre el precio de compra y el precio de venta de una acción o activo.\n\n✅ Indica el costo oculto de comprar y vender\n✅ Cuanto más pequeño, más fácil es negociar\n✅ Afecta la liquidez del mercado\n✅ Importante para entender costos y rentabilidad\n\n*📊 Ideal para optimizar tus operaciones y reducir gastos.*"},
     {"fecha": "10/12/2025 14:30", "mensaje": "📚 *Miércoles de educación financiera*\n🧠 *Mini clase: ¿Qué es la cartera de crecimiento vs la cartera conservadora?*\n\nHola Impulsores! Como todos los miércoles, les dejamos una explicación breve y clave 👇\n\n🔹 ¿Qué es una cartera de crecimiento?\nBusca maximizar ganancias con inversiones más arriesgadas y volátiles.\n\n🔹 ¿Qué es una cartera conservadora?\nPrioriza proteger el capital con inversiones más seguras y estables.\n\n✅ Cartera de crecimiento: más riesgo, mayor potencial de ganancia\n✅ Cartera conservadora: menos riesgo, menor volatilidad\n✅ Elegir depende de tu perfil y objetivos\n✅ Balancear ambas puede ser una buena estrategia\n\n*📊 Ideal para definir cómo querés manejar tus inversiones según tu tolerancia al riesgo.*"},
-    {"fecha": "05/06/2025 02:15", "mensaje": "📚 *Miércoles de educación financiera*\n🧠 *Mini clase: ¿Qué es el ratio precio/utilidad (P/U)?*\n\nHola Impulsores! Como todos los miércoles, les dejamos una explicación breve y clave 👇\n\n🔹 ¿Qué es el ratio P/U?\nEs una medida que compara el precio de una acción con las ganancias que genera por acción.\n\n✅ Un P/U alto puede indicar expectativas de crecimiento\n✅ Un P/U bajo puede sugerir que la acción está barata o en problemas\n✅ Útil para comparar empresas dentro de un sector\n✅ Ayuda a tomar decisiones de compra o venta\n\n*📊 Ideal para evaluar si una acción está sobrevaluada o subvaluada.*"},
+    {"fecha": "17/12/2025 14:30", "mensaje": "📚 *Miércoles de educación financiera*\n🧠 *Mini clase: ¿Qué es el ratio precio/utilidad (P/U)?*\n\nHola Impulsores! Como todos los miércoles, les dejamos una explicación breve y clave 👇\n\n🔹 ¿Qué es el ratio P/U?\nEs una medida que compara el precio de una acción con las ganancias que genera por acción.\n\n✅ Un P/U alto puede indicar expectativas de crecimiento\n✅ Un P/U bajo puede sugerir que la acción está barata o en problemas\n✅ Útil para comparar empresas dentro de un sector\n✅ Ayuda a tomar decisiones de compra o venta\n\n*📊 Ideal para evaluar si una acción está sobrevaluada o subvaluada.*"},
+    {"fecha": "07/01/2025 14:30", "mensaje": "📚 *Miércoles de educación financiera*\n🧠 *Mini clase: ¿Qué es una acción?*\n\nHola Impulsores! Como todos los miércoles, les dejamos una *explicación breve y clave* 👇\n\n🔹 *¿Qué es una acción?*\n*Es una parte de propiedad de una empresa* que podés comprar y vender en la bolsa.\n\n✅ *Ser dueño de una acción significa ser socio de la empresa*\n✅ *Podés ganar plata si la empresa crece y su valor sube*\n✅ *Algunas acciones pagan dividendos* (ganancias distribuidas)\n✅ *Se negocian en mercados organizados* y su precio varía según oferta y demanda\n\n*📊 Ideal para quienes buscan crecimiento y participar en el éxito de las empresas.*"},
+    {"fecha": "06/06/2025 10:42", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Qué significa cuando dicen que un bono está 'rindiendo el 20%'?\"\n\n🧠 *Respuesta Impulso Merval:*\nCuando se dice que un bono rinde 20%, significa que si lo comprás hoy y lo mantenés hasta el vencimiento, vas a ganar un 20% anual sobre lo que pagaste.\nEse rendimiento tiene en cuenta cuánto pagás hoy vs. cuánto te devuelve el bono (intereses y capital). No es lo mismo que la tasa que paga el bono originalmente, sino cuánto ganás en relación al precio actual.\n\n📊 *Tip:* A veces, un bono puede tener una tasa baja pero estar muy barato, y ahí es donde el rendimiento se dispara."},
+    {"fecha": "13/06/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Conviene más comprar dólar MEP o dejar la plata en cauciones?\"\n\n🧠 *Respuesta Impulso Merval:*\nDepende del contexto. Las cauciones suelen dar una tasa diaria en pesos, y sirven para aprovechar la plata sin riesgo en el corto plazo. Si el dólar MEP está tranquilo y tenés pesos que no vas a usar, puede tener sentido dejarlos en caución unos días.\nAhora, si esperás que el dólar suba fuerte o querés cobertura, el MEP es una mejor opción, aunque a veces la diferencia se paga en el spread.\n\n📊 *Tip:* Una buena práctica es comparar la tasa mensual de la caución con la expectativa de devaluación. Si esperás que el dólar suba más que lo que rinde la caución, mejor cubrirte."},
+    {"fecha": "20/06/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué baja el precio de un bono aunque paga intereses?\"\n\n🧠 *Respuesta Impulso Merval:*\nQue un bono pague intereses no garantiza que suba de precio. Su valor depende de muchos factores: la tasa de interés del mercado, el riesgo del emisor, la inflación esperada y la demanda de ese bono. Si suben las tasas, los bonos existentes que pagan menos se vuelven menos atractivos y su precio baja.\nTambién puede pasar que el mercado perciba más riesgo (como un posible default), y eso impacta en el precio aunque siga pagando intereses.\n\n📊 *Tip:* A veces un bono puede tener buena renta pero caer de precio por condiciones externas. Por eso es clave mirar el contexto y no solo el cupón."},
+    {"fecha": "04/07/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué un bono puede pagar 50% anual pero igual ser riesgoso?\"\n\n🧠 *Respuesta Impulso Merval:*\nUn bono que paga un interés muy alto suele tener ese rendimiento porque el mercado percibe un riesgo elevado de impago o incumplimiento. Es como una ‘prima por riesgo’: cuanto más riesgoso, más paga para compensar.\nSi la empresa o país emisora tiene problemas económicos, puede no pagar intereses o capital a tiempo.\n\n📊 *Tip:* No te fijes solo en la tasa, fijate en el emisor y su salud financiera antes de invertir."},
+    {"fecha": "11/07/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué a veces sube el dólar y también suben los bonos?\"\n\n🧠 *Respuesta Impulso Merval:*\nAunque parezca contradictorio, puede pasar cuando hay expectativas de mejoras económicas o arreglos con el FMI que impulsan la confianza. El dólar sube por demanda o inflación, pero los bonos suben porque mejora la percepción del riesgo y el mercado anticipa pagos más seguros.\n\n📊 *Tip:* Observá siempre el contexto macro: dólar y bonos pueden reaccionar a factores diferentes o al mismo tiempo por distintos motivos."},
+    {"fecha": "18/07/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Me conviene entrar a un bono si ya subió mucho?\"\n\n🧠 *Respuesta Impulso Merval:*\nEntrar después de una suba fuerte puede ser riesgoso porque el precio ya incorporó buena parte de las buenas noticias. Eso puede reducir tu potencial de ganancia o aumentar el riesgo de caída.\n\n📊 *Tip:* Antes de comprar, evaluá el rendimiento actual, la situación del emisor y el contexto económico. A veces es mejor esperar una corrección o buscar bonos con mejor precio."},
+    {"fecha": "25/07/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Qué significa cuando dicen que una acción 'rompió resistencia'?\"\n\n🧠 *Respuesta Impulso Merval:*\nRomper una resistencia significa que el precio de la acción superó un nivel donde antes había tenido dificultad para subir. Esto suele indicar que hay más fuerza compradora y puede anticipar una suba mayor.\n\n📊 *Tip:* En análisis técnico, las resistencias actúan como ‘techo’. Que se rompa una resistencia es una señal positiva, pero siempre hay que confirmar con volumen y contexto."},
+    {"fecha": "01/08/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Si vendo antes del pago de dividendos, lo cobro igual?\"\n\n🧠 *Respuesta Impulso Merval:*\nNo, para cobrar dividendos tenés que ser dueño de la acción en la fecha de corte o ‘ex-dividendo’. Si vendés antes de esa fecha, el comprador es quien recibe el pago.\n\n📊 *Tip:* Revisá siempre la fecha ex-dividendo para planificar tus ventas y cobros."},
+    {"fecha": "08/08/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué un bono a descuento puede rendir más que uno que paga mucho cupón?\"\n\n🧠 *Respuesta Impulso Merval:*\nUn bono a descuento se compra por menos de su valor nominal y al vencimiento paga el total. La diferencia entre lo que pagás y lo que recibís genera rendimiento, que puede superar al de bonos con cupones altos si el precio de compra es suficientemente bajo.\n\n📊 *Tip:* No solo fijes en el cupón, también mirá el precio y el plazo para calcular el rendimiento total."},
+    {"fecha": "15/08/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Conviene reinvertir las cauciones todos los días o dejarlo una semana?\"\n\n🧠 *Respuesta Impulso Merval:*\nLa caución semanal suele ofrecer una mejor tasa que los plazos más cortos o más largos, por eso suele ser nuestra recomendación.\nReinvertir a diario puede aprovechar el interés compuesto, pero implica más operaciones y seguimiento.\n\n📊 *Tip:* Revisá comisiones y tu disponibilidad. Si podés dejarlo una semana, es una opción simple y rentable."},
+    {"fecha": "22/08/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Qué diferencia hay entre una ON en pesos y una en dólares?\"\n\n🧠 *Respuesta Impulso Merval:*\nUna ON (Obligación Negociable) en pesos paga intereses y capital en pesos, por lo que está expuesta a la inflación y tipo de cambio.\nUna ON en dólares paga en dólares, ofreciendo protección frente a la devaluación, pero puede tener más riesgo cambiario para argentinos.\n\n📊 *Tip:* Elegí según tu estrategia y expectativa del dólar y la inflación."},
+    {"fecha": "29/08/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Qué significa cuando una acción está 'planchada'?\"\n\n🧠 *Respuesta Impulso Merval:*\nUna acción está 'planchada' cuando su precio se mueve muy poco, casi sin volatilidad, generalmente porque hay poca demanda o el mercado está esperando novedades.\n\n📊 *Tip:* En estos casos, suele ser difícil aprovechar movimientos rápidos, pero también puede ser oportunidad si esperás una noticia que la haga subir."},
+    {"fecha": "05/09/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Es mejor comprar una acción que está subiendo o esperar una baja?\"\n\n🧠 *Respuesta Impulso Merval:*\nNo hay respuesta única. Comprar en suba puede aprovechar momentum, pero el precio puede estar alto.\nEsperar una baja puede conseguir mejor precio, pero el mercado puede seguir subiendo.\n\n📊 *Tip:* Definí tu estrategia y tolerancia al riesgo. El timing perfecto es difícil; lo importante es invertir con disciplina y objetivos claros."},
+    {"fecha": "12/09/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Qué implica vender con stop loss? ¿Pierdo mucha plata?\"\n\n🧠 *Respuesta Impulso Merval:*\nVender con stop loss es poner un límite automático para vender si el precio baja hasta cierto nivel, para evitar pérdidas mayores.\nNo siempre pierdes mucha plata, depende de dónde pongas ese límite.\n\n📊 *Tip:* Usar stop loss ayuda a controlar el riesgo y emociones, pero debe estar bien calibrado para no vender por caídas temporarias."},
+    {"fecha": "19/09/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Me conviene pasar de plazo fijo a dólar MEP?\"\n\n🧠 *Respuesta Impulso Merval:*\nDepende de tus objetivos: si buscás protegerte de la inflación y la devaluación, el dólar MEP puede ser mejor a largo plazo.\nSi priorizás una ganancia fija en pesos o lo necesitas en pesos dentro de un periodo corto de tiempo, el plazo fijo es mejor opción.\n\n📊 *Tip:* Considerá tu horizonte y tolerancia al riesgo antes de mover la plata."},
+    {"fecha": "26/09/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Qué significa cuando dicen que un bono es 'duro'?\"\n\n🧠 *Respuesta Impulso Merval:*\nUn bono ‘duro’ es uno que tiene vencimiento a largo plazo, por lo general más de 10 años. Esto implica mayor riesgo por tiempo, pero también puede ofrecer mejores rendimientos.\n\n📊 *Tip:* Los bonos duros suelen ser más sensibles a cambios en tasas e inflación."},
+    {"fecha": "03/10/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Si compro un CEDEAR, influye la cotización del dólar CCL?\"\n\n🧠 *Respuesta Impulso Merval:*\nSí, porque los CEDEAR reflejan acciones extranjeras pero se negocian en pesos, y el dólar CCL es el que se usa para transferir dólares entre mercados.\nSi el dólar CCL sube, el precio en pesos del CEDEAR suele subir también.\n\n📊 *Tip:* Para invertir en CEDEAR, seguí siempre el dólar CCL y las noticias del mercado internacional."},
+    {"fecha": "10/10/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Qué quiere decir que un bono esté operando 'con ley extranjera'?\"\n\n🧠 *Respuesta Impulso Merval:*\nSignifica que el bono está emitido bajo la legislación de otro país (ejemplo: Nueva York) en vez de la argentina.\nEsto brinda mayor protección legal al inversor y puede facilitar pagos en moneda extranjera.\n\n📊 *Tip:* Los bonos con ley extranjera suelen ser más confiables para inversores, pero pueden tener riesgos legales distintos y tener un rendimiento menor."},
+    {"fecha": "17/10/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué si baja la tasa en EE.UU. suben los CEDEARs?\"\n\n🧠 *Respuesta Impulso Merval:*\nCuando bajan las tasas en EE.UU., los costos de financiamiento son menores y la rentabilidad de activos seguros baja, haciendo que los inversores busquen más acciones y CEDEARs, subiendo su precio.\n\n📊 *Tip:* Las tasas impactan mucho en la valoración de activos, por eso los CEDEARs suelen subir cuando las tasas bajan."},
+    {"fecha": "24/10/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Qué hago si compré un bono largo y necesito la plata antes?\"\n\n🧠 *Respuesta Impulso Merval:*\nPodés vender el bono en el mercado antes del vencimiento, pero su precio puede ser menor o mayor al que pagaste, dependiendo de las tasas y el mercado.\n\n📊 *Tip:* Evaluá siempre el precio de mercado y tus necesidades. Vender antes puede generar ganancias o pérdidas."},
+    {"fecha": "31/10/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Qué implica que un bono tenga duration 6 años? ¿Es malo si sube la tasa?\"\n\n🧠 *Respuesta Impulso Merval:*\nLa duration mide cuánto tarda en recuperarse el dinero invertido y cuánto puede cambiar el precio del bono si suben las tasas.\nUn bono con duration 6 años es sensible a cambios en tasas: si suben, su precio puede caer bastante.\n\n📊 *Tip:* Cuanto mayor la duration, mayor el riesgo ante suba de tasas, pero también mayor potencial de ganancia si bajan."},
+    {"fecha": "07/11/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Cómo saber si un bono tiene riesgo de default?\"\n\n🧠 *Respuesta Impulso Merval:*\nEl riesgo de default es la posibilidad de que el emisor no pague intereses o capital a tiempo.\nPara evaluarlo, mirá la calificación crediticia, la situación financiera del emisor y el contexto económico.\n\n📊 *Tip:* Las agencias de rating y análisis de mercado son buenas fuentes para medir este riesgo."},
+    {"fecha": "14/11/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué me recomiendan esperar al rebote para vender?\"\n\n🧠 *Respuesta Impulso Merval:*\nEsperar al rebote significa vender cuando el precio se recupera un poco tras una caída, para no concretar pérdidas mayores.\nAsí podés aprovechar una mejor cotización y proteger tu inversión.\n\n📊 *Tip:* Ten paciencia y usa análisis técnico para identificar buenos momentos de venta."},
+    {"fecha": "21/11/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Cuándo conviene rotar la cartera?\"\n\n🧠 *Respuesta Impulso Merval:*\nConviene rotar la cartera cuando cambian las condiciones del mercado, sectores o tu objetivo financiero.\nLa rotación busca aprovechar oportunidades y reducir riesgos.\n\n📊 *Tip:* Revisá tu cartera regularmente y ajustala según análisis y metas."},
+    {"fecha": "28/11/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Qué significa si un activo está en 'modo riesgo ON'?\"\n\n🧠 *Respuesta Impulso Merval:*\n‘Modo riesgo ON’ indica que los inversores están más confiados y buscan activos con mayor riesgo y potencial de ganancia.\nEsto suele subir el precio de acciones, bonos y otros activos riesgosos.\n\n📊 *Tip:* En este modo, los activos seguros pueden bajar y los riesgos aumentan, así que ajustá tu cartera según tu perfil."},
+    {"fecha": "05/12/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué puede bajar una acciones cuando hay un buenos balances?\"\n\n🧠 *Respuesta Impulso Merval:*\nA veces las expectativas ya están reflejadas en el precio y un buen balance no sorprende porque incluso se esperaba uno mejor.\nOtras veces, la empresa puede advertir desafíos futuros (un balance proyectado malo).\n\n📊 *Tip:* No te fijes solo en el resultado, también analizá las proyecciones y compara el valor esperado por el mercado vs el valor recibido"},
+    {"fecha": "12/12/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Qué significa cuando dicen ‘el mercado ya lo tenía priceado’?\"\n\n🧠 *Respuesta Impulso Merval:*\nSignifica que la información o evento ya estaba anticipado y reflejado en el precio de los activos.\nPor eso, cuando sucede, el precio no cambia mucho.\n\n📊 *Tip:* El mercado siempre intenta anticipar noticias para ajustar precios antes que ocurran."},
+    {"fecha": "19/12/2025 14:20", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Cuándo conviene más comprar: antes o después del pago de dividendos?\"\n\n🧠 *Respuesta Impulso Merval:*\nSi comprás antes, cobrás el dividendo pero el precio suele caer después del pago.\nSi comprás después, evitás esa caída pero no cobrás dividendos.\n\n📊 *Tip:* Pensá en tu estrategia: ingreso por dividendos o ganancia por precio."},
 ]
+
+def cerrar_excel():
+    os.system('taskkill /f /im excel.exe')
 
 def enviar_mensaje(texto):
     print(f"🔔 Enviando mensaje: {texto}")
     pywhatkit.sendwhatmsg_to_group_instantly(nombre_grupo, "", wait_time=10, tab_close=False)
     time.sleep(3)
-    pyperclip.copy(texto)
-    pyautogui.hotkey("ctrl", "v")
+    
+    if texto == "[Resumen alertas 📊]":
+        pyautogui.write(texto)
+        pyautogui.press("enter")
+        time.sleep(0.5)
+        pyautogui.hotkey("ctrl", "v")  # Pega el Excel
+    else:
+        pyperclip.copy(texto)
+        pyautogui.hotkey("ctrl", "v")
+
     pyautogui.press("enter")
-    time.sleep(1)
-    pyautogui.hotkey("ctrl", "w")
+    time.sleep(3)
+    pyautogui.hotkey("ctrl", "w")  # Cierra WhatsApp Web
+
+    if texto == "[Resumen alertas 📊]":
+        time.sleep(1)
+        cerrar_excel()
 
 print("Bot iniciado. Esperando el horario correcto...")
 
@@ -115,7 +162,6 @@ while True:
     hora_actual = ahora.strftime("%H:%M")
     fecha_actual = ahora.strftime("%d/%m/%Y %H:%M")
 
-    # Mensajes por día de la semana
     for item in mensajes_semana:
         if dia_actual in item["dias"] and hora_actual == item["hora"]:
             if item["mensaje"] == "cotizacion_dolar":
@@ -126,23 +172,24 @@ while True:
                 mensaje_final = generar_alerta_aleatoria()
             elif item["mensaje"] == "alerta_bursatil_arg":
                 mensaje_final = generar_alerta_aleatoria_arg()
+            elif item["mensaje"] == "resumenAlertas":
+                generar_resumen_alertas()
+                seleccionar_y_copiar_excel()
+                mensaje_final = "[Resumen alertas 📊]"
             else:
                 mensaje_final = item["mensaje"]
 
             if "[!] Error" in mensaje_final:
-                print(mensaje_final)  # Solo se muestra en consola
+                print(mensaje_final)
             else:
                 enviar_mensaje(mensaje_final)
 
-    # Mensajes por fecha específica
     for item in mensajes_fecha:
         if fecha_actual == item["fecha"]:
             enviar_mensaje(item["mensaje"])
 
-    # Esperar hasta el siguiente minuto
     segundos_restantes = 60 - ahora.second
     time.sleep(segundos_restantes)
-
 
 
 
@@ -151,11 +198,6 @@ while True:
 # Algo breve sobre la historia de una empresa, índice o concepto financiero. Ej:
 
 # “¿Sabías que McDonald's gana más con sus propiedades que con hamburguesas?”
-
-# 2. "Mini Glosario Financiero" (1 concepto por semana)
-# Un mini post explicando un término clave. Ej:
-
-# “¿Qué es el Free Cash Flow y por qué importa en un balance?”
 
 # 3. "Empresa para Mirar" (1 vez por semana o quincenal)
 # Perfil breve de una empresa poco conocida con potencial. Sin recomendar compra, solo informar. Ej: una small cap interesante.
@@ -170,8 +212,4 @@ while True:
 # Una vez por semana respondé una pregunta que te hayan hecho por WhatsApp o Instagram (aunque la inventes al principio).
 
 # 🧠 Opcional (si querés meter algo más didáctico)
-# Mini tutoriales o “hilos” por WhatsApp:
 # Cómo leer un balance / Cómo ver ratios clave / Cómo armar una watchlist en TradingView.
-
-# Encuestas o trivias
-# Para generar interacción y feedback. Podés hacerla desde Instagram y luego compartir resultados por WhatsApp.

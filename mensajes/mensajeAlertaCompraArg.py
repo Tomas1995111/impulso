@@ -1,7 +1,10 @@
-#apiyfinance.py
+# mensajeAlertaCompraArg.py
 import yfinance as yf
 import random
 import math
+import datetime
+import openpyxl
+import time
 
 tickers_arg = [
     "GGAL.BA", "YPFD.BA", "BMA.BA", "BBAR.BA", "PAMP.BA",
@@ -15,6 +18,27 @@ tickers_arg = [
     "GBAN.BA", "CGPA2.BA",    
 ]
 
+def guardar_en_excel(fecha, ticker, precio, stop_loss, ruta_excel):
+    try:
+        wb = openpyxl.load_workbook(ruta_excel)
+        ws = wb.active
+
+        # Buscar primera fila vacía
+        fila = 2
+        while ws.cell(row=fila, column=1).value is not None:
+            fila += 1
+
+        # Guardar los datos
+        ws.cell(row=fila, column=1).value = fecha
+        ws.cell(row=fila, column=2).value = ticker
+        ws.cell(row=fila, column=3).value = precio
+        ws.cell(row=fila, column=4).value = stop_loss
+
+        wb.save(ruta_excel)
+        print(f"Datos guardados en fila {fila}")
+    except Exception as e:
+        print(f"Error al guardar en Excel: {e}")
+
 def obtener_datos_accion(ticker):
     accion = yf.Ticker(ticker)
     info = accion.info
@@ -26,7 +50,7 @@ def obtener_datos_accion(ticker):
         "variacion_pct": info.get("regularMarketChangePercent"),
         "max_dia": info.get("dayHigh"),
         "min_dia": info.get("dayLow"),
-        "max_historico": accion.history(period="max")["High"].max(),
+        "max_historico": accion.history(period="max")["High"].max() if not accion.history(period="max").empty else None,
         "capitalizacion_bursatil": info.get("marketCap"),
         "pe_ratio": info.get("trailingPE"),
         "rendimiento_dividendos": info.get("dividendYield"),
@@ -66,14 +90,17 @@ def generar_alerta(datos):
 - - - - - - - - - - - - - - - - - - - - - - 
 Recuerde operar bajo su propio riesgo y en la justa y considerada proporción de su cartera. (la misma no configura ninguna recomendación)
 """
+         # Guardar en Excel si hay alerta
+        fecha_actual = datetime.date.today().strftime("%Y-%m-%d")
+        ruta_excel = "C:\\Users\\Tomas\\OneDrive\\Escritorio\\impulso_wsp_bot\\registros\\alertas.xlsx"
+        guardar_en_excel(fecha_actual, datos['ticker'], precio_actual, SL, ruta_excel)
+
         return mensaje.strip()
     else:
         return None
 
 def generar_alerta_aleatoria_arg():
-    """Busca en la lista tickers_top alguna acción que cumpla y devuelve mensaje o None."""
-    import random
-    import time
+    """Busca en la lista tickers_arg alguna acción que cumpla y devuelve mensaje o None."""
 
     tickers_restantes = tickers_arg.copy()
     random.shuffle(tickers_restantes)
