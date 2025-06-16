@@ -1,24 +1,50 @@
-## Pendientes
+# ✅ Checklist Prioritario Impulso Merval
 
-- **Lead Magnet**: Crear para la web, Instagram, etc.
-- **Página Web**: Diseñar y publicar.
-- **Instagram**: Armar calendario de contenido.
-- **Embudo de Ventas**: Crear estructura completa.
-- **Secuencia de Correos / WhatsApp**: Automatizar mensajes para educar y vender.
-- **Producto Educativo**: Desarrollar curso grabado o similar.
-- **Estrategia de Cursos**: Definir temario, formato y plataforma.
-- **Automatización**: Optimizar procesos para escalar.
-- **Publicidad Pagada**: Definir presupuesto y plan.
-- **Ads en Instagram**: Empezar con tests de bajo presupuesto.
-- **SEO**: Evaluar posicionamiento web.
-- **Email Marketing**: Estrategia para clientes activos y ex clientes.
-- **Informes**: Mejorar estética y contenido de reportes.
-- **Recuperar Clientes**: Ofrecer productos nuevos vía email marketing.
-- **Cursos**: Implementar y definir estrategia de venta.
-- **Publicidad**: Analizar canales más efectivos (SEO, Instagram, etc.).
-- **WhatsApp**: Controlar miembros dados de baja.
-- **Multiplataforma**: Evaluar sumar TikTok, YouTube u otros.
-- Investigar mas de whatsappbussines no le estamos sacando el partido, historias, catalogo, que otras cosas? solo utilizamos el chat
+## 🔥 Fase 1 - Fundacional (Captación básica + embudo inicial)
+Catalogo Whatsapp
+Historias whatsapp
+1. ✅Crear Lead Magnet (Mini-glosario financiero en PDF)
+2. Diseñar y publicar Landing Page para captación de mails (Lead Magnet + CTA de prueba gratis)
+3. Configurar secuencia básica de email marketing:
+    - Día 0: PDF
+    - Día 3: Oferta prueba
+    - Día 7: Último recordatorio
+4. Integrar automatización básica de emails (MailerLite, Brevo, etc)
+5. Preparar prueba gratis automatizada (acceso a grupo WhatsApp)
+6. Optimizar Linktree (ordenar: prueba gratis, lead magnet, contacto, redes)
+7. Controlar grupo whatsapp
+
+## 🔥 Fase 2 - Generación de contenido recurrente (atracción y confianza)
+8. Armar calendario de contenido para Instagram (Reels, historias, encuestas, glosario, preguntas)
+9. Lanzar los primeros reels/tips educativos para atraer tráfico orgánico
+10. Implementar newsletter semanal (resumen de mercado + tip educativo + CTA a servicio)
+11. Crear y publicar mini-tutoriales educativos (breves, simples: lectura de balance, TradingView, ratios, etc.)
+12. Empezar a responder preguntas frecuentes de la comunidad (Instagram, email, WhatsApp)
+
+## 🔥 Fase 3 - Validación del embudo y primeras pruebas pagas
+13. Definir y testear campaña de ads en Instagram (bajo presupuesto para captar leads al lead magnet)
+14. Medir conversión del embudo completo (descarga ➔ prueba ➔ suscripción)
+15. Ajustar mensajes, copies y landings según resultados iniciales
+
+## 🔥 Fase 4 - Expansión de producto y automatización
+16. Desarrollar el primer Producto Educativo grabado (curso básico de inversiones)
+17. Definir estrategia de venta de cursos:
+    - Formato (grabado, micro cursos)
+    - Plataforma (Hotmart, Gumroad, web propia)
+18. Automatizar mensajes de educación y venta vía WhatsApp Business
+19. Optimizar automatizaciones backend (cobros, seguimientos, CRM simple, etc)
+
+## 🔥 Fase 5 - Escalamiento y diversificación
+20. Desarrollar y lanzar la página web completa (blog, recursos, cursos, suscripción, contacto)
+21. Profundizar el uso de WhatsApp Business (historias, catálogo, preguntas frecuentes, automatizaciones)
+22. Evaluar sumar nuevos canales (YouTube, TikTok, Discord o foro)
+23. Implementar estrategia de recuperación de clientes inactivos (email marketing)
+
+## 🔥 Fase 6 - Optimización continua
+24. Mejorar estética y profundidad de informes sectoriales y carteras
+25. Analizar SEO para blog o web educativa
+26. Analizar performance de los distintos canales pagos vs orgánicos (ads, SEO, redes)
+27. Auditar periódicamente procesos de membresía y retención
 
 ---
 
@@ -158,6 +184,20 @@ Personas interesadas en invertir que aún no conocen el servicio. Querés que:
 | 📅 Según calendario     | 📢 Recordatorios clave     | - Feriados en BYMA y NYSE<br>- Vencimiento de opciones                                       |
 
 ---
+
+# Calendario de Contenidos Instagram Impulso Merval (Optimizado 100% Programable)
+
+| 📅 Día/Frecuencia | 📌 Pilar | 📦 Contenido |
+|-------------------|----------|--------------|
+| 🗓️ Lunes | 📚 Educación básica | Carrusel:<br>• “Mito vs realidad de invertir en Argentina”<br>• “Mini guía: Cómo empezar en la bolsa”<br>• “Error frecuente al armar cartera”<br>• “Checklist de control de riesgo” |
+| 🗓️ Miércoles | 🎥 Video educativo | Reel:<br>• “Qué es el Merval en 60s”<br>• “Qué es el dólar MEP explicado simple”<br>• “Cómo leer un balance básico”<br>• “Qué mirar antes de comprar acciones” |
+| 🗓️ Viernes | 🧪 Prueba social + CTA | Post:<br>• Testimonio de suscriptor / Screenshot de grupo WhatsApp<br>• “Sumate al grupo de WhatsApp y recibí el resumen diario”<br>• Recordatorio de Lead Magnet gratuito |
+| 🗓️ Sábado | 🧠 Microtips semanales | Post single: #TipMerval (4 tips rotativos)<br>• “Tip de diversificación”<br>• “Tip de control de riesgo”<br>• “Tip de dólar MEP”<br>• “Tip de promedio de compra” |
+| 🗓️ Lunes a Jueves (3x semana) | 📊 Historias educativas + CTA | Historias programadas:<br>• "¿Qué es la inflación?" (slide visual simple)<br>• "Qué es el riesgo de mercado" (slide simple)<br>• "Cómo se compone un portafolio diversificado"<br>• "Error común: perseguir precios altos"<br>• Sticker encuesta ("¿Te sirvió?")<br>• CTA “Mandá INFO por DM” |
+| 🗓️ Cada 15 días | 📈 Historias evergreen (fijas) | Historias:<br>• “3 claves para empezar a invertir”<br>• “3 errores que todos cometen al arrancar” |
+| 📅 Permanente | 🔗 Captación directa | Destacado "Empieza aquí": propuesta de valor + CTA WhatsApp/DM |
+
+
 
 ## Embudo de Ventas – Visual Pro
 
