@@ -7,11 +7,20 @@ import ctypes
 import time
 import subprocess
 import os
+import logging
+
 from mensajes.mensajeCotizacionesDolar import generar_cotizacion_dolar
 from mensajes.mensajeResumen import generar_mensaje_resumen
 from mensajes.mensajeAlertaCompra import generar_alerta_aleatoria
 from mensajes.mensajeAlertaCompraArg import generar_alerta_aleatoria_arg
 from registros.reporteAlertas import generar_resumen_alertas, seleccionar_y_copiar_excel
+
+# NUEVO: configuramos el log para guardar los eventos en un archivo
+logging.basicConfig(
+    filename="C:\\Users\\Tomas\\OneDrive\\Escritorio\\impulso_wsp_bot\\log_envioWhatsapp.log",
+    level=logging.INFO,
+    format='%(asctime)s %(message)s'
+)
 
 ES_CONTINUOUS = 0x80000000
 ES_SYSTEM_REQUIRED = 0x00000001
@@ -31,6 +40,7 @@ mensajes_semana = [
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:12", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "15:00", "mensaje": "cotizacion_dolar"},
     {"dias": ["friday"], "hora": "13:30", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*"},
+    # {"dias": ["tuesday"], "hora": "00:30", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"}, #TEST
 ]
 
 mensajes_fecha = [
@@ -237,6 +247,8 @@ def cerrar_excel():
 def enviar_mensaje(texto, grupo=None):
     destino = grupo if grupo else nombre_grupo
     print(f"🔔 Enviando mensaje a {destino}: {texto}")
+    logging.info(f"Enviando mensaje a {destino}: {texto}") 
+
     pywhatkit.sendwhatmsg_to_group_instantly(destino, "", wait_time=10, tab_close=False)
     time.sleep(3)
     
@@ -259,6 +271,7 @@ def enviar_mensaje(texto, grupo=None):
         cerrar_excel()
 
 print("Bot iniciado. Esperando el horario correcto...")
+logging.info("Bot iniciado correctamente.")
 
 while True:
     ahora = datetime.datetime.now()
@@ -289,7 +302,7 @@ while True:
                 grupo_destino = item.get("grupo", nombre_grupo)
                 enviar_mensaje(mensaje_final, grupo=grupo_destino)
 
-    # Mantenés tu lógica de mensajes por fecha si la usás
+    # Logica de mensajes por fecha
     for item in mensajes_fecha:
         if fecha_actual == item["fecha"]:
             grupo_destino = item.get("grupo", nombre_grupo)
