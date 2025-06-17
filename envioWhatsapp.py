@@ -32,7 +32,7 @@ nombre_grupo = "LDHlzsldWl2B03bfRnVNA9" #Grupo Impulso
 # nombre_grupo = "EfwcuD1Yj9QC7nHQSN9TdT" #Grupo Revisión
 
 mensajes_semana = [
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "08:50", "mensaje": "noticia_mercado"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "18:20", "mensaje": "noticia_mercado"},
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:00", "mensaje": "resumenAlertas", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:03", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:06", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
