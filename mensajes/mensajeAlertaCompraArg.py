@@ -1,11 +1,12 @@
-# mensajeAlertaCompraArg.py
 import yfinance as yf
 import random
 import math
 import datetime
-import openpyxl
 import time
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
+# Lista de acciones argentinas
 tickers_arg = [
     "GGAL.BA", "YPFD.BA", "BMA.BA", "BBAR.BA", "PAMP.BA",
     "TGSU2.BA", "TXAR.BA", "SUPV.BA", "COME.BA", "BYMA.BA",
@@ -18,27 +19,30 @@ tickers_arg = [
     "GBAN.BA", "CGPA2.BA",    
 ]
 
-def guardar_en_excel(fecha, ticker, precio, stop_loss, ruta_excel):
+# ID de tu hoja de cálculo
+SHEET_ID = "1Z9gfXGPdhBktLMwAIj4KpJ5SI2hDKK5lXG2Z63DaMSI"
+
+# Función para guardar en Google Sheets
+def guardar_en_gsheet(fecha, ticker, precio, stop_loss, sheet_id):
     try:
-        wb = openpyxl.load_workbook(ruta_excel)
-        ws = wb.active
+        scope = [
+            "https://spreadsheets.google.com/feeds",
+            "https://www.googleapis.com/auth/drive"
+        ]
+        creds = ServiceAccountCredentials.from_json_keyfile_name("mensajes/credenciales.json", scope)
+        client = gspread.authorize(creds)
+        sheet = client.open_by_key(sheet_id).sheet1
 
-        # Buscar primera fila vacía
-        fila = 2
-        while ws.cell(row=fila, column=1).value is not None:
-            fila += 1
+        fila_vacia = len(sheet.get_all_values()) + 1
+        sheet.update(f"A{fila_vacia}", [[fecha, ticker, precio, stop_loss]])
 
-        # Guardar los datos
-        ws.cell(row=fila, column=1).value = fecha
-        ws.cell(row=fila, column=2).value = ticker
-        ws.cell(row=fila, column=3).value = precio
-        ws.cell(row=fila, column=4).value = stop_loss
-
-        wb.save(ruta_excel)
-        print(f"Datos guardados en fila {fila}")
+        print(f"✅ Datos guardados en Google Sheet (fila {fila_vacia})")
     except Exception as e:
-        print(f"Error al guardar en Excel: {e}")
+        import traceback
+        print("❌ Error al guardar en Google Sheet:")
+        traceback.print_exc()
 
+# Obtiene datos de la acción
 def obtener_datos_accion(ticker):
     accion = yf.Ticker(ticker)
     info = accion.info
@@ -60,16 +64,15 @@ def obtener_datos_accion(ticker):
 
     return datos
 
+# Genera alerta si se cumplen condiciones
 def generar_alerta(datos):
     precio_actual = datos["precio_actual"]
     max_historico = datos["max_historico"]
     recomendacion = datos["recomendacion"]
 
-    # Si no hay recomendacion, considerarla como "buy"
     if recomendacion is None or recomendacion.lower() == "none":
         recomendacion = "buy"
 
-    # Aceptar "buy", "strong_buy" y "strongBuy" (por precaución)
     if recomendacion.lower() in ["buy", "strong_buy", "strongbuy"] and precio_actual < 0.8 * max_historico:
         PE = math.floor(precio_actual)
         SL_pct = -random.uniform(6, 14) / 100
@@ -90,18 +93,14 @@ def generar_alerta(datos):
 - - - - - - - - - - - - - - - - - - - - - - 
 Recuerde operar bajo su propio riesgo y en la justa y considerada proporción de su cartera. (la misma no configura ninguna recomendación)
 """
-         # Guardar en Excel si hay alerta
         fecha_actual = datetime.date.today().strftime("%Y-%m-%d")
-        ruta_excel = "C:\\Users\\Tomas\\OneDrive\\Escritorio\\impulso_wsp_bot\\registros\\alertas.xlsx"
-        guardar_en_excel(fecha_actual, datos['ticker'], precio_actual, SL, ruta_excel)
-
+        guardar_en_gsheet(fecha_actual, datos['ticker'], precio_actual, SL, SHEET_ID)
         return mensaje.strip()
     else:
         return None
 
+# Prueba de tickers aleatoriamente
 def generar_alerta_aleatoria_arg():
-    """Busca en la lista tickers_arg alguna acción que cumpla y devuelve mensaje o None."""
-
     tickers_restantes = tickers_arg.copy()
     random.shuffle(tickers_restantes)
 
@@ -111,12 +110,12 @@ def generar_alerta_aleatoria_arg():
             mensaje = generar_alerta(datos)
             if mensaje:
                 return mensaje
-            time.sleep(1)  # para no saturar requests
+            time.sleep(1)
         except Exception as e:
-            print(f"Error con {ticker}: {e}")
+            print(f"⚠️ Error con {ticker}: {e}")
     return None
 
-# Si quieres probar el script directamente
+# Ejecutar script directamente
 if __name__ == "__main__":
     alerta = generar_alerta_aleatoria_arg()
     if alerta:

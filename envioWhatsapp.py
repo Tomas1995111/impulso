@@ -1,4 +1,3 @@
-# envioWhatsapp.py
 import pywhatkit
 import pyautogui
 import pyperclip
@@ -6,41 +5,42 @@ import datetime
 import ctypes
 import time
 import subprocess
-import os
 import logging
+import os
+import sys
 
+# Mensajes personalizados
 from mensajes.mensajeCotizacionesDolar import generar_cotizacion_dolar
 from mensajes.mensajeResumen import generar_mensaje_resumen
 from mensajes.mensajeAlertaCompra import generar_alerta_aleatoria
 from mensajes.mensajeAlertaCompraArg import generar_alerta_aleatoria_arg
-from registros.reporteAlertas import generar_resumen_alertas, seleccionar_y_copiar_excel
 
-# NUEVO: configuramos el log para guardar los eventos en un archivo
+# Configurar logging
 logging.basicConfig(
     filename="C:\\Users\\Tomas\\OneDrive\\Escritorio\\impulso_wsp_bot\\log_envioWhatsapp.log",
     level=logging.INFO,
     format='%(asctime)s %(message)s'
 )
 
+# Evita que la PC suspenda mientras corre el bot
 ES_CONTINUOUS = 0x80000000
 ES_SYSTEM_REQUIRED = 0x00000001
 ES_AWAYMODE_REQUIRED = 0x00000040
-
 ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_AWAYMODE_REQUIRED)
 
-nombre_grupo = "LDHlzsldWl2B03bfRnVNA9" #Grupo Impulso
+# nombre_grupo = "LDHlzsldWl2B03bfRnVNA9" #Grupo Impulso
 # nombre_grupo = "EfwcuD1Yj9QC7nHQSN9TdT" #Grupo Revisión
+nombre_grupo = "I22BQXw1eO45eh2ee83WuZ" #Grupo Test
 
 mensajes_semana = [
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "18:20", "mensaje": "noticia_mercado"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:00", "mensaje": "resumenAlertas", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:03", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:06", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:09", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:12", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "15:00", "mensaje": "cotizacion_dolar"},
-    {"dias": ["friday"], "hora": "13:30", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*"},
-    # {"dias": ["tuesday"], "hora": "00:30", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"}, #TEST
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "10:54", "mensaje": "noticia_mercado"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "10:56", "mensaje": "alerta_bursatil", "grupo": "I22BQXw1eO45eh2ee83WuZ"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "10:00", "mensaje": "alerta_bursatil", "grupo": "I22BQXw1eO45eh2ee83WuZ"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "10:00", "mensaje": "alerta_bursatil_arg", "grupo": "I22BQXw1eO45eh2ee83WuZ"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "10:58", "mensaje": "alerta_bursatil_arg", "grupo": "I22BQXw1eO45eh2ee83WuZ"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:00", "mensaje": "reporte_google_sheet", "grupo": "I22BQXw1eO45eh2ee83WuZ"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:02", "mensaje": "cotizacion_dolar"},
+    {"dias": ["friday"], "hora": "11:04", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*"},
 ]
 
 mensajes_fecha = [
@@ -54,7 +54,7 @@ mensajes_fecha = [
     {"fecha": "26/11/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El jueves 27/11 la Bolsa de Nueva York estará cerrada por el Día de Acción de Gracias.\nEl viernes 28/11 cerrará temprano a las 13:00 por el mismo motivo."},
     {"fecha": "05/12/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 08/12 la Bolsa de Buenos Aires estará cerrada por el feriado de la Inmaculada Concepción."},
     {"fecha": "23/12/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El martes 24/12 la Bolsa de Nueva York cerrará temprano a las 13:00 hs por la víspera de Navidad.\n""El miércoles 25/12 Las Bolsas de Nueva York y Buenos Aires permanecerán cerradas por el feriado de Navidad."},
-    {"fecha": "19/06/2025 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 20/06, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 19/06) a las 15:30 hs y ejercerse en cualquier momento."},
+    {"fecha": "19/06/2025 13:33", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 20/06, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 19/06) a las 15:30 hs y ejercerse en cualquier momento."},
     {"fecha": "17/07/2025 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 18/07, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 17/07) a las 15:30 hs y ejercerse en cualquier momento."},
     {"fecha": "14/08/2025 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 15/08, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 14/08) a las 15:30 hs y ejercerse en cualquier momento."},
     {"fecha": "18/09/2025 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 19/09, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 18/09) a las 15:30 hs y ejercerse en cualquier momento."}, 
@@ -137,7 +137,7 @@ mensajes_fecha = [
     {"fecha": "22/07/2026 15:30", "mensaje": "📚 *Miércoles de educación financiera*\n🧠 *Mini clase: Diversificación geográfica*\n\nHola Impulsores! Explicación breve y clave 👇\n\n🔹 *Diversificación geográfica*\nInvertir en distintos países y regiones.\n\n✅ Reduce riesgos locales (políticos, económicos)\n✅ Captura crecimiento de diferentes zonas\n✅ Se logra con CEDEARs, ETFs globales o fondos internacionales\n✅ Equilibra la cartera ante eventos específicos de un país\n\n📊 *Ideal para no depender solo de la economía argentina.*"},
     {"fecha": "06/06/2025 15:40", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Qué significa cuando dicen que un bono está 'rindiendo el 20%'?\"\n\n🧠 *Respuesta Impulso Merval:*\nCuando se dice que un bono rinde 20%, significa que si lo comprás hoy y lo mantenés hasta el vencimiento, vas a ganar un 20% anual sobre lo que pagaste.\nEse rendimiento tiene en cuenta cuánto pagás hoy vs. cuánto te devuelve el bono (intereses y capital). No es lo mismo que la tasa que paga el bono originalmente, sino cuánto ganás en relación al precio actual.\n\n📊 *Tip:* A veces, un bono puede tener una tasa baja pero estar muy barato, y ahí es donde el rendimiento se dispara."},
     {"fecha": "13/06/2025 15:40", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Conviene más comprar dólar MEP o dejar la plata en cauciones?\"\n\n🧠 *Respuesta Impulso Merval:*\nDepende del contexto. Las cauciones suelen dar una tasa diaria en pesos, y sirven para aprovechar la plata sin riesgo en el corto plazo. Si el dólar MEP está tranquilo y tenés pesos que no vas a usar, puede tener sentido dejarlos en caución unos días.\nAhora, si esperás que el dólar suba fuerte o querés cobertura, el MEP es una mejor opción, aunque a veces la diferencia se paga en el spread.\n\n📊 *Tip:* Una buena práctica es comparar la tasa mensual de la caución con la expectativa de devaluación. Si esperás que el dólar suba más que lo que rinde la caución, mejor cubrirte."},
-    {"fecha": "20/06/2025 15:40", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué baja el precio de un bono aunque paga intereses?\"\n\n🧠 *Respuesta Impulso Merval:*\nQue un bono pague intereses no garantiza que suba de precio. Su valor depende de muchos factores: la tasa de interés del mercado, el riesgo del emisor, la inflación esperada y la demanda de ese bono. Si suben las tasas, los bonos existentes que pagan menos se vuelven menos atractivos y su precio baja.\nTambién puede pasar que el mercado perciba más riesgo (como un posible default), y eso impacta en el precio aunque siga pagando intereses.\n\n📊 *Tip:* A veces un bono puede tener buena renta pero caer de precio por condiciones externas. Por eso es clave mirar el contexto y no solo el cupón."},
+    {"fecha": "20/06/2025 10:53", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué baja el precio de un bono aunque paga intereses?\"\n\n🧠 *Respuesta Impulso Merval:*\nQue un bono pague intereses no garantiza que suba de precio. Su valor depende de muchos factores: la tasa de interés del mercado, el riesgo del emisor, la inflación esperada y la demanda de ese bono. Si suben las tasas, los bonos existentes que pagan menos se vuelven menos atractivos y su precio baja.\nTambién puede pasar que el mercado perciba más riesgo (como un posible default), y eso impacta en el precio aunque siga pagando intereses.\n\n📊 *Tip:* A veces un bono puede tener buena renta pero caer de precio por condiciones externas. Por eso es clave mirar el contexto y no solo el cupón."},
     {"fecha": "27/06/2025 15:40", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Cuándo conviene más comprar: antes o después del pago de dividendos?\"\n\n🧠 *Respuesta Impulso Merval:*\nSi comprás antes, cobrás el dividendo pero el precio suele caer después del pago.\nSi comprás después, evitás esa caída pero no cobrás dividendos.\n\n📊 *Tip:* Pensá en tu estrategia: ingreso por dividendos o ganancia por precio."},
     {"fecha": "04/07/2025 15:40", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué un bono puede pagar 50% anual pero igual ser riesgoso?\"\n\n🧠 *Respuesta Impulso Merval:*\nUn bono que paga un interés muy alto suele tener ese rendimiento porque el mercado percibe un riesgo elevado de impago o incumplimiento. Es como una ‘prima por riesgo’: cuanto más riesgoso, más paga para compensar.\nSi la empresa o país emisora tiene problemas económicos, puede no pagar intereses o capital a tiempo.\n\n📊 *Tip:* No te fijes solo en la tasa, fijate en el emisor y su salud financiera antes de invertir."},
     {"fecha": "11/07/2025 15:40", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué a veces sube el dólar y también suben los bonos?\"\n\n🧠 *Respuesta Impulso Merval:*\nAunque parezca contradictorio, puede pasar cuando hay expectativas de mejoras económicas o arreglos con el FMI que impulsan la confianza. El dólar sube por demanda o inflación, pero los bonos suben porque mejora la percepción del riesgo y el mercado anticipa pagos más seguros.\n\n📊 *Tip:* Observá siempre el contexto macro: dólar y bonos pueden reaccionar a factores diferentes o al mismo tiempo por distintos motivos."},
@@ -241,9 +241,6 @@ mensajes_fecha = [
     {"fecha": "02/06/2026 15:50", "mensaje": "⚖️ *El peor error es abandonar el plan por miedo.* Seguir es siempre más rentable que dudar."},
 ]
 
-def cerrar_excel():
-    os.system('taskkill /f /im excel.exe')
-
 def enviar_mensaje(texto, grupo=None):
     destino = grupo if grupo else nombre_grupo
     print(f"🔔 Enviando mensaje a {destino}: {texto}")
@@ -251,24 +248,12 @@ def enviar_mensaje(texto, grupo=None):
 
     pywhatkit.sendwhatmsg_to_group_instantly(destino, "", wait_time=10, tab_close=False)
     time.sleep(3)
-    
-    if texto == "[Resumen alertas 📊]":
-        pyautogui.write(texto)
-        pyautogui.press("enter")
-        time.sleep(0.5)
-        pyautogui.hotkey("ctrl", "v")
-    else:
-        pyperclip.copy(texto)
-        pyautogui.hotkey("ctrl", "v")
-
+    pyperclip.copy(texto)
+    pyautogui.hotkey("ctrl", "v")
     time.sleep(5)
     pyautogui.press("enter")
     time.sleep(5)
     pyautogui.hotkey("ctrl", "w")
-
-    if texto == "[Resumen alertas 📊]":
-        time.sleep(1)
-        cerrar_excel()
 
 print("Bot iniciado. Esperando el horario correcto...")
 logging.info("Bot iniciado correctamente.")
@@ -281,6 +266,7 @@ while True:
 
     for item in mensajes_semana:
         if dia_actual in item["dias"] and hora_actual == item["hora"]:
+            mensaje_final = ""
             if item["mensaje"] == "cotizacion_dolar":
                 mensaje_final = generar_cotizacion_dolar()
             elif item["mensaje"] == "noticia_mercado":
@@ -289,20 +275,21 @@ while True:
                 mensaje_final = generar_alerta_aleatoria()
             elif item["mensaje"] == "alerta_bursatil_arg":
                 mensaje_final = generar_alerta_aleatoria_arg()
-            elif item["mensaje"] == "resumenAlertas":
-                generar_resumen_alertas()
-                seleccionar_y_copiar_excel()
-                mensaje_final = "[Resumen alertas 📊]"
+            elif item["mensaje"] == "reporte_google_sheet":
+                try:
+                    subprocess.run([sys.executable, "mensajes/reporteAlertas.py"], check=True)
+                    mensaje_final =  f"📈 *Reporte actualizado - {fecha_actual}*\\n\\n""📊 Resumen Alertas.\\n\\n""👉 https://docs.google.com/spreadsheets/d/1Z9gfXGPdhBktLMwAIj4KpJ5SI2hDKK5lXG2Z63DaMSI/edit?usp=sharing"
+                except Exception as e:
+                    mensaje_final = f"[!] Error al generar reporte: {e}"
             else:
                 mensaje_final = item["mensaje"]
 
-            if "[!] Error" in mensaje_final:
+            if "[!]" in mensaje_final:
                 print(mensaje_final)
             else:
                 grupo_destino = item.get("grupo", nombre_grupo)
                 enviar_mensaje(mensaje_final, grupo=grupo_destino)
 
-    # Logica de mensajes por fecha
     for item in mensajes_fecha:
         if fecha_actual == item["fecha"]:
             grupo_destino = item.get("grupo", nombre_grupo)

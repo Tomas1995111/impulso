@@ -40,3 +40,6 @@ extras/
 
 # Perfiles de chrome
 PerfilesChrome/
+
+# credenciales de google sheet
+mensajes/credenciales.json

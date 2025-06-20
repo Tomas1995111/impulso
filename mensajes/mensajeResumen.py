@@ -31,6 +31,7 @@ def extraer_con_perfil(url, perfil_path):
 
 def buscar_url_resumen():
     fecha = time.strftime("%Y/%m/%d")
+    # fecha = "2025/06/18"
     query = f"site:cnbc.com {fecha} stocks making the biggest premarket"
     
     for url in search(query, num_results=10):

@@ -1,9 +1,10 @@
-pandas
-matplotlib
-pyautogui
-pyperclip
-pywhatkit
-openpyxl
 yfinance
+gspread
+oauth2client
+requests
+beautifulsoup4
 selenium
-googlesearch
+googlesearch-python
+pyautogui
+pywhatkit
+pyperclip

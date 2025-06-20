@@ -1,52 +1,96 @@
-
 # impulso_wsp_bot
 
-Bot en Python para enviar mensajes programados a un grupo de WhatsApp, con información financiera y bursátil diaria.
+Bot en Python para enviar mensajes automáticos a un grupo de WhatsApp con contenido financiero personalizado. Incluye alertas, cotizaciones, noticias del mercado y reportes diarios o por fecha.
 
 ---
+
+## ⚙️ Funcionalidad
+
+El bot envía automáticamente mensajes a WhatsApp en horarios programados. Algunas de sus funciones principales:
+
+- 📈 **Alertas bursátiles** aleatorias (acciones locales y del exterior)
+- 💵 **Cotización del dólar** scrapeada desde sitios web financieros
+- 🗞️ **Resumen de noticias** traducidas usando Selenium y Google
+- 📊 **Reporte automatizado** cargado en Google Sheets
+- 📆 **Mensajes especiales** por fechas predefinidas
+
+Todo se configura desde el archivo `envioWhatsapp.py`.
+
+---
+
 
 ## Estructura del proyecto
 
 ```
 impulso_wsp_bot/
+├── envioWhatsapp.py # Script principal del bot
+├── chromedriver.exe # Driver Chrome para Selenium
+├── requirements.txt # Dependencias del proyecto
+├── README.md # Documentación
+├── log_envioWhatsapp.log # Log de actividad del bot
+├── PyWhatKit_DB.txt # Registro interno de pywhatkit (puede eliminarse si no se usa más)
 │
-├── __pycache__/             # Cachés de Python (generados automáticamente)
-├── PerfilesChrome/          # Perfiles de Chrome usados por Selenium
-├── extras/                  # Scripts o utilidades auxiliares
-├── mensajes/                # Scripts que generan los mensajes automáticos
-│   ├── __init__.py
-│   ├── mensajeCotizacionesDolar.py
-│   ├── mensajeNoticias.py
-│   └── mensajeAlertaCompra.py
-├── envioWhatsapp.py         # Script principal que programa y envía los mensajes
-├── chromedriver.exe         # Driver para Selenium
-├── .gitignore               # Archivos a ignorar por Git
-└── README.md                # Este archivo
+├── mensajes/ # Lógica para generar cada tipo de mensaje
+│ ├── mensajeAlertaCompra.py
+│ ├── mensajeAlertaCompraArg.py
+│ ├── mensajeCotizacionesDolar.py
+│ ├── mensajeResumen.py
+│ ├── reporteAlertas.py
+│ └── credenciales.json # Acceso a Google Sheets (no compartir)
+│
+├── extras/ # Scripts secundarios o utilitarios
+│ ├── enviardocumento.py
+│ └── index.html
+
+├── PerfilesChrome/ # Perfiles Chrome usados para automatizar
+├── pycache/ # Caché de compilación de Python
 ```
 
 ---
 
-## Descripción
 
-El bot envía mensajes automáticos a un grupo de WhatsApp en horarios y días específicos, incluyendo:
+## 🧰 Requisitos
 
-- Noticias del mercado financiero (extraídas con Selenium y scraping)
-- Cotización del dólar
-- Alertas bursátiles aleatorias
-- Mensajes especiales en fechas definidas
+- Python 3.8 o superior
+- Navegador Google Chrome
+- Tener escaneado el QR de WhatsApp Web en el perfil de Chrome usado por Selenium
+- Tener `chromedriver.exe` compatible con la versión de Chrome
 
 ---
 
-## Dependencias
+## ▶️ Uso
 
-- Python 3.8+
-- [pywhatkit](https://pypi.org/project/pywhatkit/)
-- pyautogui
-- pyperclip
-- selenium
-- googlesearch-python
+1. Cloná el proyecto o descargalo en tu máquina.
+2. Instalá las dependencias con:
 
-Se recomienda instalar todo con:
+```bash
+pip install -r requirements.txt
+```
+
+3. Configurá el grupo de destino y los horarios en `envioWhatsapp.py`.
+4. Ejecutá el bot:
+
+```bash
+python envioWhatsapp.py
+```
+
+El bot quedará corriendo en segundo plano y enviará los mensajes según el cronograma.
+
+---
+
+## 📦 Dependencias
+
+El proyecto requiere las siguientes librerías de Python:
+
+- `yfinance`
+- `gspread`
+- `oauth2client`
+- `requests`
+- `beautifulsoup4`
+- `selenium`
+- `googlesearch-python`
+
+Instalalas ejecutando:
 
 ```bash
 pip install -r requirements.txt
@@ -54,37 +98,16 @@ pip install -r requirements.txt
 
 ---
 
-## Uso
+## 🚀 Mejoras futuras
 
-1. Configurar el nombre del grupo WhatsApp en `envioWhatsapp.py` en la variable `nombre_grupo`.
-2. Ajustar los horarios y días en las listas `mensajes_semana` y `mensajes_fecha`.
-3. Configurar los perfiles de Chrome para Selenium en `mensajes/mensajeNoticias.py`.
-4. Ejecutar el script principal:
-
-```bash
-python envioWhatsapp.py
-```
+- Ejecutar el bot 100% headless (requiere cambiar la forma de envío de mensajes)
+- Integrar archivo `.env` para mover configuraciones sensibles
+- Cargar los horarios y tipos de mensajes desde Google Sheets
+- Implementar logs detallados con más control de errores
 
 ---
 
-## Notas importantes
+## 👨‍💻 Autor
 
-- Se usa **pywhatkit** para abrir WhatsApp Web y **pyautogui** para pegar y enviar los mensajes.
-- Para el scraping de noticias se utiliza **Selenium** con perfiles de Chrome para obtener contenido traducido.
-- Asegurate de tener `chromedriver.exe` compatible con tu versión de Chrome.
-- El bot debe ejecutarse en un ambiente con acceso a la interfaz gráfica para que pyautogui funcione bien.
-
----
-
-## Mejoras pendientes
-
-- Manejo de errores y reconexión automática.
-- Logs más detallados.
-- Archivo de configuración externo para horarios y mensajes.
-- Automatizar la actualización del driver de Chrome.
-
----
-
-## Autor
-
-Tomás Arriola
+**Tomás Arriola**  
+Proyecto orientado a automatizar el envío de información bursátil y ayudar a democratizar el acceso a contenido financiero en Argentina.
