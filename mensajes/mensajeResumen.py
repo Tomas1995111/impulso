@@ -48,7 +48,7 @@ def buscar_url_resumen():
     print("No se encontró el artículo")
     return None
 
-def esperar_y_buscar_url(max_espera_min=120, intervalo_min=5): #intervalo_min
+def esperar_y_buscar_url(max_espera_min=100, intervalo_min=5): #intervalo_min
     inicio = time.time()
     while (time.time() - inicio) < max_espera_min * 60:
         url = buscar_url_resumen()
