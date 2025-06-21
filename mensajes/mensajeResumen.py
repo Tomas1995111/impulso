@@ -31,7 +31,7 @@ def extraer_con_perfil(url, perfil_path):
 
 def buscar_url_resumen():
     fecha = time.strftime("%Y/%m/%d")
-    # fecha = "2025/06/18"
+    fecha = "2025/06/18"
     query = f"site:cnbc.com {fecha} stocks making the biggest premarket"
     
     for url in search(query, num_results=10):
@@ -60,7 +60,7 @@ def esperar_y_buscar_url(max_espera_min=100, intervalo_min=5): #intervalo_min
     return None
 
 def generar_mensaje_resumen():
-    url = esperar_y_buscar_url()  # Reintenta hasta 2 horas, cada 5 minutos
+    url = esperar_y_buscar_url()  # Reintenta hasta 100 minutos, cada 5 minutos
     if not url:
         return ""
 
@@ -70,7 +70,7 @@ def generar_mensaje_resumen():
     resultados_ingles = extraer_con_perfil(url, perfil1)
     resultados_traducido = extraer_con_perfil(url, perfil2)
 
-    mensaje = "📊 *Muy buenos días Impuslores, les dejamos los mayores movimientos de acciones del día de hoy:* 📊\n\n"
+    mensaje = "📊 *Mayores movimientos de acciones* 📊\n\n"
     for i, (titulo, _) in enumerate(resultados_ingles):
         contenido = resultados_traducido[i][1] if i < len(resultados_traducido) else "(sin contenido)"
         mensaje += f"🔹 {titulo}:\n{contenido}\n\n"
