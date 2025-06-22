@@ -198,17 +198,19 @@ Personas interesadas en invertir que aún no conocen el servicio. Querés que:
 | 📅 Permanente | 🔗 Captación directa | Destacado "Empieza aquí": propuesta de valor + CTA WhatsApp/DM |
 
 
-
-## Embudo de Ventas – Visual Pro
-
-| Etapa            | Acción                | Canal            | Frecuencia          | CTA / Objetivo                  |
-| ---------------- | --------------------- | ---------------- | ------------------- | ------------------------------- |
-| Atracción        | Reels + tips          | Instagram        | 1–2 x semana        | “Link en bio para newsletter”   |
-| Atracción        | Historias + encuestas | Instagram        | 2–3 x semana        | Captar interés y mails          |
-| Atracción        | Mensajes a exclientes | WhatsApp + Email | 1 vez + seguimiento | Enviar newsletter gratuito      |
-| Conversión       | Landing con PDF       | Web              | Permanente          | Captar mail con valor inmediato |
-| Valor inicial    | Mail bienvenida + PDF | Email            | Automático          | Conectar y educar               |
-| Valor inicial    | Newsletter semanal    | Email            | Viernes             | Generar confianza               |
-| Oferta suave     | CTA semanal           | Email            | 1 x semana          | Ofrecer suscripción paga        |
-| Conversión final | Prueba gratis         | WhatsApp / Email | Cuando haya interés | Cierre sin riesgo               |
-
+# ⚡ Embudo Impulso Merval v2.1  
+*“del anuncio al pago en 7 días”*
+Ads ➜ Landing ➜ Thank-You ➜ Grupo WA (7 d) ➜ Pago
+| Paso | Qué ocurre | CTA clave |
+|------|-----------|-----------|
+| **1. Anuncio**<br>IG · FB · Google | “Invertí 🇦🇷 en 5 min/día  •  7 d GRATIS + PDF” | **Probar gratis** |
+| **2. Landing** | Formulario → **Nombre + Email + WhatsApp**  <br>Checkbox consentimiento ↗ | **Quiero mis 7 días** |
+| **3. Thank-You** *(2 pasos)* | ① Descargá PDF 📥 <br>② Entrá al grupo 💬 (deep-link WA) | **Entrar al grupo** |
+| **4. Automatización** | **D0** Mail/WA: PDF + link grupo <br>**D2** Mail: tip CEDEAR 60 s + «Seguinos en IG» <br>**D5** WA: encuesta ✔/✘ → Si ✔ link plan pago <br>**D7** Mail/WA: «Último día» + botón **Activar membresía $7 500** | **Activar membresía** |
+| **5. Grupo WA (trial)** | Mensaje fijado = reglas + link MercadoPago <br>D6 testimonio + oferta «Congelá precio hoy» <br>Bot palabra **ALTA** ⇒ checkout | **ALTA** |
+---
+### 🗝️ Notas rápidas
+- **Checkbox**: sin pre-tildar → cumple Ley 25 326 & políticas ads.  
+- **Deep-link WA**: `https://chat.whatsapp.com/XXXXX` o `wa.me/549...`  
+- Si NO paga al día 7 → retargeting Ads + newsletter free cada viernes.
+> Memorizar: **A-L-T-G-P** → *Ad · Landing · Thank-you · Grupo · Pago*

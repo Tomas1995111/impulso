@@ -35,6 +35,7 @@ ES_AWAYMODE_REQUIRED = 0x00000040
 ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_AWAYMODE_REQUIRED)
 
 nombre_grupo = "LDHlzsldWl2B03bfRnVNA9" #Grupo Impulso
+grupo_backup = "FY8RiMYYdnQ1UJf1ItXbe1"
 # nombre_grupo = "EfwcuD1Yj9QC7nHQSN9TdT" #Grupo Revisión
 # nombre_grupo = "I22BQXw1eO45eh2ee83WuZ" #Grupo Test
 
@@ -47,6 +48,7 @@ mensajes_semana = [
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:08", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:12", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "12:00", "mensaje": "reporte_google_sheet", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
+    {"dias": ["sunday"], "hora": "03:50", "mensaje": "💰 *¡TEST!*", "grupo": ["I22BQXw1eO45eh2ee83WuZ", "EhvM2RB1GalGa3OZll2bVW"]},
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "15:00", "mensaje": "cotizacion_dolar"},
     {"dias": ["friday"], "hora": "13:30", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*"},
 ]
@@ -145,7 +147,7 @@ mensajes_fecha = [
     {"fecha": "22/07/2026 15:30", "mensaje": "📚 *Miércoles de educación financiera*\n🧠 *Mini clase: Diversificación geográfica*\n\nHola Impulsores! Explicación breve y clave 👇\n\n🔹 *Diversificación geográfica*\nInvertir en distintos países y regiones.\n\n✅ Reduce riesgos locales (políticos, económicos)\n✅ Captura crecimiento de diferentes zonas\n✅ Se logra con CEDEARs, ETFs globales o fondos internacionales\n✅ Equilibra la cartera ante eventos específicos de un país\n\n📊 *Ideal para no depender solo de la economía argentina.*"},
     {"fecha": "06/06/2025 15:40", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Qué significa cuando dicen que un bono está 'rindiendo el 20%'?\"\n\n🧠 *Respuesta Impulso Merval:*\nCuando se dice que un bono rinde 20%, significa que si lo comprás hoy y lo mantenés hasta el vencimiento, vas a ganar un 20% anual sobre lo que pagaste.\nEse rendimiento tiene en cuenta cuánto pagás hoy vs. cuánto te devuelve el bono (intereses y capital). No es lo mismo que la tasa que paga el bono originalmente, sino cuánto ganás en relación al precio actual.\n\n📊 *Tip:* A veces, un bono puede tener una tasa baja pero estar muy barato, y ahí es donde el rendimiento se dispara."},
     {"fecha": "13/06/2025 15:40", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Conviene más comprar dólar MEP o dejar la plata en cauciones?\"\n\n🧠 *Respuesta Impulso Merval:*\nDepende del contexto. Las cauciones suelen dar una tasa diaria en pesos, y sirven para aprovechar la plata sin riesgo en el corto plazo. Si el dólar MEP está tranquilo y tenés pesos que no vas a usar, puede tener sentido dejarlos en caución unos días.\nAhora, si esperás que el dólar suba fuerte o querés cobertura, el MEP es una mejor opción, aunque a veces la diferencia se paga en el spread.\n\n📊 *Tip:* Una buena práctica es comparar la tasa mensual de la caución con la expectativa de devaluación. Si esperás que el dólar suba más que lo que rinde la caución, mejor cubrirte."},
-    {"fecha": "20/06/2025 18:03", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué baja el precio de un bono aunque paga intereses?\"\n\n🧠 *Respuesta Impulso Merval:*\nQue un bono pague intereses no garantiza que suba de precio. Su valor depende de muchos factores: la tasa de interés del mercado, el riesgo del emisor, la inflación esperada y la demanda de ese bono. Si suben las tasas, los bonos existentes que pagan menos se vuelven menos atractivos y su precio baja.\nTambién puede pasar que el mercado perciba más riesgo (como un posible default), y eso impacta en el precio aunque siga pagando intereses.\n\n📊 *Tip:* A veces un bono puede tener buena renta pero caer de precio por condiciones externas. Por eso es clave mirar el contexto y no solo el cupón."},
+    {"fecha": "20/06/2025 15:40", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué baja el precio de un bono aunque paga intereses?\"\n\n🧠 *Respuesta Impulso Merval:*\nQue un bono pague intereses no garantiza que suba de precio. Su valor depende de muchos factores: la tasa de interés del mercado, el riesgo del emisor, la inflación esperada y la demanda de ese bono. Si suben las tasas, los bonos existentes que pagan menos se vuelven menos atractivos y su precio baja.\nTambién puede pasar que el mercado perciba más riesgo (como un posible default), y eso impacta en el precio aunque siga pagando intereses.\n\n📊 *Tip:* A veces un bono puede tener buena renta pero caer de precio por condiciones externas. Por eso es clave mirar el contexto y no solo el cupón."},
     {"fecha": "27/06/2025 15:40", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Cuándo conviene más comprar: antes o después del pago de dividendos?\"\n\n🧠 *Respuesta Impulso Merval:*\nSi comprás antes, cobrás el dividendo pero el precio suele caer después del pago.\nSi comprás después, evitás esa caída pero no cobrás dividendos.\n\n📊 *Tip:* Pensá en tu estrategia: ingreso por dividendos o ganancia por precio."},
     {"fecha": "04/07/2025 15:40", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué un bono puede pagar 50% anual pero igual ser riesgoso?\"\n\n🧠 *Respuesta Impulso Merval:*\nUn bono que paga un interés muy alto suele tener ese rendimiento porque el mercado percibe un riesgo elevado de impago o incumplimiento. Es como una ‘prima por riesgo’: cuanto más riesgoso, más paga para compensar.\nSi la empresa o país emisora tiene problemas económicos, puede no pagar intereses o capital a tiempo.\n\n📊 *Tip:* No te fijes solo en la tasa, fijate en el emisor y su salud financiera antes de invertir."},
     {"fecha": "11/07/2025 15:40", "mensaje": "📩 *Viernes de preguntas:*\n\"¿Por qué a veces sube el dólar y también suben los bonos?\"\n\n🧠 *Respuesta Impulso Merval:*\nAunque parezca contradictorio, puede pasar cuando hay expectativas de mejoras económicas o arreglos con el FMI que impulsan la confianza. El dólar sube por demanda o inflación, pero los bonos suben porque mejora la percepción del riesgo y el mercado anticipa pagos más seguros.\n\n📊 *Tip:* Observá siempre el contexto macro: dólar y bonos pueden reaccionar a factores diferentes o al mismo tiempo por distintos motivos."},
@@ -284,7 +286,7 @@ while True:
             elif item["mensaje"] == "alerta_bursatil_arg":
                 mensaje_final = generar_alerta_aleatoria_arg()
             elif item["mensaje"] == "resumen_indices":
-                 mensaje_final = generar_mensaje_indices()
+                mensaje_final = generar_mensaje_indices()
             elif item["mensaje"] == "reporte_google_sheet":
                 try:
                     subprocess.run([sys.executable, "mensajes/reporteAlertas.py"], check=True)
@@ -297,13 +299,23 @@ while True:
             if "[!]" in mensaje_final:
                 print(mensaje_final)
             else:
-                grupo_destino = item.get("grupo", nombre_grupo)
-                enviar_mensaje(mensaje_final, grupo=grupo_destino)
+                grupos_destino = item.get("grupo", nombre_grupo)
+                if not isinstance(grupos_destino, list):
+                    grupos_destino = [grupos_destino]
+                if "grupo_backup" in globals() and grupo_backup not in grupos_destino:
+                    grupos_destino.append(grupo_backup)
+                for grupo in grupos_destino:
+                    enviar_mensaje(mensaje_final, grupo=grupo)
 
     for item in mensajes_fecha:
         if fecha_actual == item["fecha"]:
-            grupo_destino = item.get("grupo", nombre_grupo)
-            enviar_mensaje(item["mensaje"], grupo=grupo_destino)
+            grupos_destino = item.get("grupo", nombre_grupo)
+            if not isinstance(grupos_destino, list):
+                grupos_destino = [grupos_destino]
+            if "grupo_backup" in globals() and grupo_backup not in grupos_destino:
+                grupos_destino.append(grupo_backup)
+            for grupo in grupos_destino:
+                enviar_mensaje(item["mensaje"], grupo=grupo)
 
     segundos_restantes = 60 - ahora.second
     time.sleep(segundos_restantes)
