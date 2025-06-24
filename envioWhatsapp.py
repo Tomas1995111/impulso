@@ -34,27 +34,42 @@ ES_SYSTEM_REQUIRED = 0x00000001
 ES_AWAYMODE_REQUIRED = 0x00000040
 ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_AWAYMODE_REQUIRED)
 
-nombre_grupo = "LDHlzsldWl2B03bfRnVNA9" #Grupo Impulso
+# nombre_grupo = "LDHlzsldWl2B03bfRnVNA9" #Grupo Impulso
 grupo_backup = "FY8RiMYYdnQ1UJf1ItXbe1"
 # nombre_grupo = "EfwcuD1Yj9QC7nHQSN9TdT" #Grupo Revisión
-# nombre_grupo = "I22BQXw1eO45eh2ee83WuZ" #Grupo Test
+nombre_grupo = "I22BQXw1eO45eh2ee83WuZ" #Grupo Test
+
+# mensajes_semana = [
+#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:00", "mensaje": "💪 *Muy buenos días, Impulsores.*\nHoy es una nueva oportunidad para seguir creciendo juntos.\nLes compartimos el impulso del mercado para seguir siempre un paso adelante."},
+#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:05", "mensaje": "resumen_indices"},
+#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:10", "mensaje": "noticia_mercado"},
+#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:00", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
+#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:05", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
+#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:10", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
+#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:15", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
+#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "12:00", "mensaje": "reporte_google_sheet", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
+#     # {"dias": ["sunday"], "hora": "03:50", "mensaje": "💰 *¡TEST!*", "grupo": ["I22BQXw1eO45eh2ee83WuZ", "EhvM2RB1GalGa3OZll2bVW"]},
+#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "15:00", "mensaje": "cotizacion_dolar"},
+#     {"dias": ["friday"], "hora": "13:30", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*"},
+# ]
 
 mensajes_semana = [
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:00", "mensaje": "💪 *Muy buenos días, Impulsores.*\nHoy es una nueva oportunidad para seguir creciendo juntos.\nLes compartimos el impulso del mercado para seguir siempre un paso adelante."},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:04", "mensaje": "resumen_indices"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:08", "mensaje": "noticia_mercado"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:00", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:04", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:08", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:12", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "12:00", "mensaje": "reporte_google_sheet", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-    {"dias": ["sunday"], "hora": "03:50", "mensaje": "💰 *¡TEST!*", "grupo": ["I22BQXw1eO45eh2ee83WuZ", "EhvM2RB1GalGa3OZll2bVW"]},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "15:00", "mensaje": "cotizacion_dolar"},
-    {"dias": ["friday"], "hora": "13:30", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "19:50", "mensaje": "💪 *Muy buenos días, Impulsores.*\nHoy es una nueva oportunidad para seguir creciendo juntos.\nLes compartimos el impulso del mercado para seguir siempre un paso adelante."},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "20:05", "mensaje": "resumen_indices"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "20:25", "mensaje": "noticia_mercado"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "20:45", "mensaje": "alerta_bursatil", "grupo": "EhvM2RB1GalGa3OZll2bVW"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "21:05", "mensaje": "alerta_bursatil", "grupo": "EhvM2RB1GalGa3OZll2bVW"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "21:25", "mensaje": "alerta_bursatil_arg", "grupo": "EhvM2RB1GalGa3OZll2bVW"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "21:45", "mensaje": "alerta_bursatil_arg", "grupo": "EhvM2RB1GalGa3OZll2bVW"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "22:05", "mensaje": "reporte_google_sheet", "grupo": "EhvM2RB1GalGa3OZll2bVW"},
+    {"dias": ["monday"], "hora": "22:25", "mensaje": "💰 *¡TEST!*", "grupo": ["I22BQXw1eO45eh2ee83WuZ", "EhvM2RB1GalGa3OZll2bVW"]},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "22:45", "mensaje": "cotizacion_dolar"},
+    {"dias": ["friday"], "hora": "23:05", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*"},
 ]
 
+
 mensajes_fecha = [
-    {"fecha": "13/06/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 16/06 la Bolsa de Buenos Aires estará cerrada por el feriado en conmemoración del Gral. Güemes."},
+    {"fecha": "13/06/2025 23:25", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 16/06 la Bolsa de Buenos Aires estará cerrada por el feriado en conmemoración del Gral. Güemes."},
     {"fecha": "18/06/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El jueves 19/06 la Bolsa de Nueva York estará cerrada por Juneteenth.\nEl viernes 20/06 la Bolsa de Buenos Aires estará cerrada por el Paso a la Inmortalidad del Gral.  Belgrano."},
     {"fecha": "02/07/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El jueves 03/07 la Bolsa de Nueva York cerrará temprano a las 13:00 por el Día de Independencia.\nEl viernes 04/07 estará cerrada por el mismo motivo."},
     {"fecha": "08/07/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 09/06 la Bolsa de Buenos Aires estará cerrada por el feriado del Día de la Independencia."},
@@ -64,7 +79,7 @@ mensajes_fecha = [
     {"fecha": "26/11/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El jueves 27/11 la Bolsa de Nueva York estará cerrada por el Día de Acción de Gracias.\nEl viernes 28/11 cerrará temprano a las 13:00 por el mismo motivo."},
     {"fecha": "05/12/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 08/12 la Bolsa de Buenos Aires estará cerrada por el feriado de la Inmaculada Concepción."},
     {"fecha": "23/12/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El martes 24/12 la Bolsa de Nueva York cerrará temprano a las 13:00 hs por la víspera de Navidad.\n""El miércoles 25/12 Las Bolsas de Nueva York y Buenos Aires permanecerán cerradas por el feriado de Navidad."},
-    {"fecha": "19/06/2025 12:20", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 20/06, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 19/06) a las 15:30 hs y ejercerse en cualquier momento."},
+    {"fecha": "19/06/2025 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 20/06, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 19/06) a las 15:30 hs y ejercerse en cualquier momento."},
     {"fecha": "17/07/2025 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 18/07, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 17/07) a las 15:30 hs y ejercerse en cualquier momento."},
     {"fecha": "14/08/2025 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 15/08, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 14/08) a las 15:30 hs y ejercerse en cualquier momento."},
     {"fecha": "18/09/2025 12:30", "mensaje": "📢 *Vencimiento de Opciones*\n📅 Mañana, viernes 19/09, se produce el vencimiento mensual de opciones.\n⚠️ Recuerde que pueden negociarse hasta hoy (jueves 18/09) a las 15:30 hs y ejercerse en cualquier momento."}, 
@@ -252,18 +267,29 @@ mensajes_fecha = [
 ]
 
 def enviar_mensaje(texto, grupo=None):
-    destino = grupo if grupo else nombre_grupo
-    print(f"🔔 Enviando mensaje a {destino}: {texto}")
-    logging.info(f"Enviando mensaje a {destino}: {texto}") 
+    try:
+        destino = grupo if grupo else nombre_grupo
+        print(f"🔔 Enviando mensaje a {destino}: {texto}")
+        logging.info(f"Enviando mensaje a {destino}: {texto}") 
 
-    pywhatkit.sendwhatmsg_to_group_instantly(destino, "", wait_time=10, tab_close=False)
-    time.sleep(3)
-    pyperclip.copy(texto)
-    pyautogui.hotkey("ctrl", "v")
-    time.sleep(5)
-    pyautogui.press("enter")
-    time.sleep(5)
-    pyautogui.hotkey("ctrl", "w")
+        # Aumentamos el tiempo para que WhatsApp Web cargue bien
+        pywhatkit.sendwhatmsg_to_group_instantly(destino, "", wait_time=15, tab_close=False)
+        time.sleep(7)  # Esperamos más antes de pegar
+
+        pyautogui.click()  # Asegura foco en el campo de texto
+        time.sleep(1)
+
+        pyperclip.copy(texto)
+        pyautogui.hotkey("ctrl", "v")
+        time.sleep(3)
+
+        pyautogui.press("enter")
+        time.sleep(3)
+
+        pyautogui.hotkey("ctrl", "w")
+    except Exception as e:
+        logging.error(f"[!] Error enviando a {grupo}: {e}")
+        print(f"[!] Error enviando a {grupo}: {e}")
 
 print("Bot iniciado. Esperando el horario correcto...")
 logging.info("Bot iniciado correctamente.")
