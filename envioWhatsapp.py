@@ -34,42 +34,28 @@ ES_SYSTEM_REQUIRED = 0x00000001
 ES_AWAYMODE_REQUIRED = 0x00000040
 ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_AWAYMODE_REQUIRED)
 
-# nombre_grupo = "LDHlzsldWl2B03bfRnVNA9" #Grupo Impulso
+nombre_grupo = "LDHlzsldWl2B03bfRnVNA9" #Grupo Impulso
 grupo_backup = "FY8RiMYYdnQ1UJf1ItXbe1"
 # nombre_grupo = "EfwcuD1Yj9QC7nHQSN9TdT" #Grupo Revisión
 nombre_grupo = "I22BQXw1eO45eh2ee83WuZ" #Grupo Test
 
-# mensajes_semana = [
-#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:00", "mensaje": "💪 *Muy buenos días, Impulsores.*\nHoy es una nueva oportunidad para seguir creciendo juntos.\nLes compartimos el impulso del mercado para seguir siempre un paso adelante."},
-#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:05", "mensaje": "resumen_indices"},
-#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:10", "mensaje": "noticia_mercado"},
-#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:00", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:05", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:10", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:15", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "12:00", "mensaje": "reporte_google_sheet", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-#     # {"dias": ["sunday"], "hora": "03:50", "mensaje": "💰 *¡TEST!*", "grupo": ["I22BQXw1eO45eh2ee83WuZ", "EhvM2RB1GalGa3OZll2bVW"]},
-#     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "15:00", "mensaje": "cotizacion_dolar"},
-#     {"dias": ["friday"], "hora": "13:30", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*"},
-# ]
-
 mensajes_semana = [
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "19:50", "mensaje": "💪 *Muy buenos días, Impulsores.*\nHoy es una nueva oportunidad para seguir creciendo juntos.\nLes compartimos el impulso del mercado para seguir siempre un paso adelante."},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "20:05", "mensaje": "resumen_indices"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "20:25", "mensaje": "noticia_mercado"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "20:45", "mensaje": "alerta_bursatil", "grupo": "EhvM2RB1GalGa3OZll2bVW"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "21:05", "mensaje": "alerta_bursatil", "grupo": "EhvM2RB1GalGa3OZll2bVW"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "21:25", "mensaje": "alerta_bursatil_arg", "grupo": "EhvM2RB1GalGa3OZll2bVW"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "21:45", "mensaje": "alerta_bursatil_arg", "grupo": "EhvM2RB1GalGa3OZll2bVW"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "22:05", "mensaje": "reporte_google_sheet", "grupo": "EhvM2RB1GalGa3OZll2bVW"},
-    {"dias": ["monday"], "hora": "22:25", "mensaje": "💰 *¡TEST!*", "grupo": ["I22BQXw1eO45eh2ee83WuZ", "EhvM2RB1GalGa3OZll2bVW"]},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "22:45", "mensaje": "cotizacion_dolar"},
-    {"dias": ["friday"], "hora": "23:05", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:00", "mensaje": "💪 *Muy buenos días, Impulsores.*\nHoy es una nueva oportunidad para seguir creciendo juntos.\nLes compartimos el impulso del mercado para seguir siempre un paso adelante."},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:05", "mensaje": "resumen_indices"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:10", "mensaje": "noticia_mercado"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:00", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:05", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:10", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:15", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "12:00", "mensaje": "reporte_google_sheet", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
+    # {"dias": ["sunday"], "hora": "03:50", "mensaje": "💰 *¡TEST!*", "grupo": ["I22BQXw1eO45eh2ee83WuZ", "EhvM2RB1GalGa3OZll2bVW"]},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "15:00", "mensaje": "cotizacion_dolar"},
+    {"dias": ["friday"], "hora": "13:30", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*"},
+    {"dias": ["tuesday"], "hora": "19:30", "mensaje": "🎁 *¡Invitá a un amigo y ganan los dos!*\n\nSi alguien se suscribe con este link 👇\nhttps://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380847596cf970175ae9482893205\n*y nos dice que vos lo invitaste*, te bonificamos *tu próximo pago* 💸\n\n👥 *¿Cómo funciona?*\n1️⃣ Compartí el link con quien creas que le puede servir\n2️⃣ Cuando se sume, que nos escriba: *\"Me invitó Juan\"*\n3️⃣ ¡Ambos reciben *30 días gratis*!\n\n📩 *Ante cualquier duda, escribime por privado.*"},
 ]
 
-
 mensajes_fecha = [
-    {"fecha": "13/06/2025 23:25", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 16/06 la Bolsa de Buenos Aires estará cerrada por el feriado en conmemoración del Gral. Güemes."},
+    {"fecha": "25/06/2025 23:46", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 16/06 la Bolsa de Buenos Aires estará cerrada por el feriado en conmemoración del Gral. Güemes."},
     {"fecha": "18/06/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El jueves 19/06 la Bolsa de Nueva York estará cerrada por Juneteenth.\nEl viernes 20/06 la Bolsa de Buenos Aires estará cerrada por el Paso a la Inmortalidad del Gral.  Belgrano."},
     {"fecha": "02/07/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El jueves 03/07 la Bolsa de Nueva York cerrará temprano a las 13:00 por el Día de Independencia.\nEl viernes 04/07 estará cerrada por el mismo motivo."},
     {"fecha": "08/07/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 09/06 la Bolsa de Buenos Aires estará cerrada por el feriado del Día de la Independencia."},
@@ -296,6 +282,7 @@ logging.info("Bot iniciado correctamente.")
 
 while True:
     ahora = datetime.datetime.now()
+    print(f"⌛ Revisión: {ahora.strftime('%d/%m/%Y %H:%M:%S')}")
     dia_actual = ahora.strftime("%A").lower()
     hora_actual = ahora.strftime("%H:%M")
     fecha_actual = ahora.strftime("%d/%m/%Y %H:%M")

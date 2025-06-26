@@ -37,7 +37,7 @@ Historias whatsapp
 ## 🔥 Fase 5 - Escalamiento y diversificación
 20. Desarrollar y lanzar la página web completa (blog, recursos, cursos, suscripción, contacto)
 21. Profundizar el uso de WhatsApp Business (historias, catálogo, preguntas frecuentes, automatizaciones)
-22. Evaluar sumar nuevos canales (YouTube, TikTok, Discord o foro)
+22. Evaluar sumar nuevos canales (YouTube, TikTok, Discord, twitter X,o foro)
 23. Implementar estrategia de recuperación de clientes inactivos (email marketing)
 
 ## 🔥 Fase 6 - Optimización continua
