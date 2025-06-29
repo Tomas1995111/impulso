@@ -1,0 +1,53 @@
+﻿$log = "C:\Users\Tomas\OneDrive\Escritorio\Proyectos\impulso_wsp_bot\vm_log.txt"
+$vmName = "Impulso"
+
+function Log($msg) {
+    $timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+    $line = "[$timestamp] $msg"
+    Add-Content $log $line
+    Write-Host $line
+}
+
+Log "=== INICIO DEL SCRIPT ==="
+Log "Verificando si la VM ya está corriendo..."
+
+$corriendo = & "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" list runningvms | Select-String $vmName
+
+if ($corriendo) {
+    Log "La VM ya está corriendo. Cancelando inicio."
+    exit
+}
+
+Log "Iniciando VM..."
+Start-Process -FilePath "C:\Program Files\Oracle\VirtualBox\VBoxHeadless.exe" -ArgumentList "--startvm `"$vmName`"" -WindowStyle Hidden
+Start-Sleep -Seconds 5
+
+Log "Esperando proceso VBoxHeadless para cambiar prioridad..."
+
+$intentos = 0
+$maxIntentos = 20
+$proceso = $null
+
+while (-not $proceso -and $intentos -lt $maxIntentos) {
+    Start-Sleep -Seconds 1
+    $proceso = Get-Process VBoxHeadless -ErrorAction SilentlyContinue
+    $intentos++
+    if ($proceso) {
+        Log "Intento $intentos - ✅ Proceso encontrado"
+    } else {
+        Log "Intento $intentos - ❌ No disponible aún"
+    }
+}
+
+if ($proceso) {
+    try {
+        $proceso.PriorityClass = 'High'
+        Log "✅ Prioridad cambiada a ALTA."
+    } catch {
+        Log "❌ Error al cambiar la prioridad: $_"
+    }
+} else {
+    Log "❌ VBoxHeadless no apareció a tiempo."
+}
+
+Log "=== FIN DEL SCRIPT ==="

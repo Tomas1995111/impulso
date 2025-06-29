@@ -3,8 +3,6 @@
 ## 🔥 Fase 1 - Fundacional (Captación básica + embudo inicial)
 Catalogo Whatsapp
 Historias whatsapp
-1. ✅Crear Lead Magnet (Mini-glosario financiero en PDF)
-2. Diseñar y publicar Landing Page para captación de mails (Lead Magnet + CTA de prueba gratis)
 3. Configurar secuencia básica de email marketing:
     - Día 0: PDF
     - Día 3: Oferta prueba

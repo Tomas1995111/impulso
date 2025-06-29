@@ -11,6 +11,7 @@ def extraer_con_perfil(url, perfil_path):
     options.add_argument("--ignore-certificate-errors")
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36")
     options.add_argument(f"user-data-dir={perfil_path}")
+    options.add_argument("--headless=new")  # Modo headless moderno
 
     driver = webdriver.Chrome(options=options)
     driver.get(url)
@@ -63,8 +64,8 @@ def generar_mensaje_resumen():
     if not url:
         return ""
 
-    perfil1 = r"C:\Users\Tomas\OneDrive\Escritorio\impulso_wsp_bot\PerfilesChrome\ChromeProfile_Normal"
-    perfil2 = r"C:\Users\Tomas\OneDrive\Escritorio\impulso_wsp_bot\PerfilesChrome\ChromeProfile_Traductor"
+    perfil1 = r"C:\Users\Tomas\OneDrive\Escritorio\Proyectos\impulso_wsp_bot\PerfilesChrome\ChromeProfile_Normal"
+    perfil2 = r"C:\Users\Tomas\OneDrive\Escritorio\Proyectos\impulso_wsp_bot\PerfilesChrome\ChromeProfile_Traductor"
 
     resultados_ingles = extraer_con_perfil(url, perfil1)
     resultados_traducido = extraer_con_perfil(url, perfil2)
