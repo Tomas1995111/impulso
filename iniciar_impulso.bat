@@ -1,2 +1,2 @@
 @echo off
-"C:\Program Files\Oracle\VirtualBox\VBoxHeadless.exe" --startvm "Impulso"
+"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm "Impulso"

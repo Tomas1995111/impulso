@@ -37,7 +37,7 @@ ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRE
 nombre_grupo = "LDHlzsldWl2B03bfRnVNA9" #Grupo Impulso
 grupo_backup = "FY8RiMYYdnQ1UJf1ItXbe1"
 # nombre_grupo = "EfwcuD1Yj9QC7nHQSN9TdT" #Grupo Revisión
-nombre_grupo = "I22BQXw1eO45eh2ee83WuZ" #Grupo Test
+# nombre_grupo = "I22BQXw1eO45eh2ee83WuZ" #Grupo Test
 
 mensajes_semana = [
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:00", "mensaje": "💪 *Muy buenos días, Impulsores.*\nHoy es una nueva oportunidad para seguir creciendo juntos.\nLes compartimos el impulso del mercado para seguir siempre un paso adelante."},
@@ -51,11 +51,11 @@ mensajes_semana = [
     # {"dias": ["sunday"], "hora": "03:50", "mensaje": "💰 *¡TEST!*", "grupo": ["I22BQXw1eO45eh2ee83WuZ", "EhvM2RB1GalGa3OZll2bVW"]},
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "15:00", "mensaje": "cotizacion_dolar"},
     {"dias": ["friday"], "hora": "13:30", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*"},
-    {"dias": ["tuesday"], "hora": "19:30", "mensaje": "🎁 *¡Invitá a un amigo y ganan los dos!*\n\nSi alguien se suscribe con este link 👇\nhttps://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380847596cf970175ae9482893205\n*y nos dice que vos lo invitaste*, te bonificamos *tu próximo pago* 💸\n\n👥 *¿Cómo funciona?*\n1️⃣ Compartí el link con quien creas que le puede servir\n2️⃣ Cuando se sume, que nos escriba: *\"Me invitó Juan\"*\n3️⃣ ¡Ambos reciben *30 días gratis*!\n\n📩 *Ante cualquier duda, escribime por privado.*"},
+    {"dias": ["tuesday"], "hora": "19:00", "mensaje": "🎁 *¡Invitá a un amigo y ganan los dos!*\n\nSi alguien se suscribe con este link 👇\nhttps://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380847596cf970175ae9482893205\n*y nos dice que vos lo invitaste*, te bonificamos *tu próximo pago* 💸\n\n👥 *¿Cómo funciona?*\n1️⃣ Compartí el link con quien creas que le puede servir\n2️⃣ Cuando se sume, que nos escriba: *\"Me invitó Juan\"*\n3️⃣ ¡Ambos reciben *30 días gratis*!\n\n📩 *Ante cualquier duda, escribime por privado.*"},
 ]
 
 mensajes_fecha = [
-    {"fecha": "25/06/2025 23:46", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 16/06 la Bolsa de Buenos Aires estará cerrada por el feriado en conmemoración del Gral. Güemes."},
+    {"fecha": "13/06/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 16/06 la Bolsa de Buenos Aires estará cerrada por el feriado en conmemoración del Gral. Güemes."},
     {"fecha": "18/06/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El jueves 19/06 la Bolsa de Nueva York estará cerrada por Juneteenth.\nEl viernes 20/06 la Bolsa de Buenos Aires estará cerrada por el Paso a la Inmortalidad del Gral.  Belgrano."},
     {"fecha": "02/07/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El jueves 03/07 la Bolsa de Nueva York cerrará temprano a las 13:00 por el Día de Independencia.\nEl viernes 04/07 estará cerrada por el mismo motivo."},
     {"fecha": "08/07/2025 12:20", "mensaje": "📢 *Aviso Feriado:*\n" "El lunes 09/06 la Bolsa de Buenos Aires estará cerrada por el feriado del Día de la Independencia."},
@@ -258,20 +258,15 @@ def enviar_mensaje(texto, grupo=None):
         print(f"🔔 Enviando mensaje a {destino}: {texto}")
         logging.info(f"Enviando mensaje a {destino}: {texto}") 
 
-        # Aumentamos el tiempo para que WhatsApp Web cargue bien
         pywhatkit.sendwhatmsg_to_group_instantly(destino, "", wait_time=15, tab_close=False)
-        time.sleep(7)  # Esperamos más antes de pegar
-
-        pyautogui.click()  # Asegura foco en el campo de texto
+        time.sleep(7)
+        pyautogui.click()
         time.sleep(1)
-
         pyperclip.copy(texto)
         pyautogui.hotkey("ctrl", "v")
         time.sleep(3)
-
         pyautogui.press("enter")
         time.sleep(3)
-
         pyautogui.hotkey("ctrl", "w")
     except Exception as e:
         logging.error(f"[!] Error enviando a {grupo}: {e}")
@@ -280,12 +275,20 @@ def enviar_mensaje(texto, grupo=None):
 print("Bot iniciado. Esperando el horario correcto...")
 logging.info("Bot iniciado correctamente.")
 
+ultima_hora_procesada = None
+
 while True:
     ahora = datetime.datetime.now()
     print(f"⌛ Revisión: {ahora.strftime('%d/%m/%Y %H:%M:%S')}")
+    pyautogui.moveRel(1, 0, duration=0.1)
+    pyautogui.moveRel(-1, 0, duration=0.1)
     dia_actual = ahora.strftime("%A").lower()
     hora_actual = ahora.strftime("%H:%M")
     fecha_actual = ahora.strftime("%d/%m/%Y %H:%M")
+
+    if hora_actual == ultima_hora_procesada:
+        time.sleep(1)
+        continue
 
     for item in mensajes_semana:
         if dia_actual in item["dias"] and hora_actual == item["hora"]:
@@ -330,5 +333,7 @@ while True:
             for grupo in grupos_destino:
                 enviar_mensaje(item["mensaje"], grupo=grupo)
 
-    segundos_restantes = 60 - ahora.second
-    time.sleep(segundos_restantes)
+    ultima_hora_procesada = hora_actual
+
+    while datetime.datetime.now().strftime("%H:%M") == hora_actual:
+        time.sleep(0.5)

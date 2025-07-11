@@ -1,52 +1,53 @@
-# ✅ Checklist Prioritario Impulso Merval
 
-## 🔥 Fase 1 - Fundacional (Captación básica + embudo inicial)
-Catalogo Whatsapp
-Historias whatsapp
-3. Configurar secuencia básica de email marketing:
-    - Día 0: PDF
-    - Día 3: Oferta prueba
-    - Día 7: Último recordatorio
-4. Integrar automatización básica de emails (MailerLite, Brevo, etc)
-5. Preparar prueba gratis automatizada (acceso a grupo WhatsApp)
-6. Optimizar Linktree (ordenar: prueba gratis, lead magnet, contacto, redes)
-7. Controlar grupo whatsapp
+Lanzar campaña de anuncios en Instagram o Facebook
+Crear y cargar un calendario de Instagram con 1 carrusel, 1 reel y 1 post de prueba social por semana
+Publicar 3 reels educativos iniciales: “¿Qué es el MEP?”, “Qué mirar en un balance”, “Error de novato al diversificar”
+Publicar carrusel educativo en Instagram
+Publicar reel educativo en Instagram
+Publicar testimonio o prueba social en Instagram
+Subir historias interactivas en Instagram tres veces por semana (encuesta, pregunta o glosario)
+Activar historias educativas con encuesta 3 veces por semana
+Subir historia con glosario o término financiero simple
+Subir historia con pregunta frecuente de la comunidad
+Publicar historia con CTA para pedir más info por DM
+Subir historia con promoción de referido
+Agregar el grupo de WhatsApp como link destacado en Instagram
+Crear historia destacada “Empieza aquí” en Instagram
+Agregar link directo al grupo trial en historias
+Hacer historia evergreen: “3 errores comunes alinvertir”
+Hacer historia evergreen: “Cómo empezar en la bolsa
+Promocionar guía gratuita en historia con swipe up o link
+Subir reel respondiendo una duda frecuente
 
-## 🔥 Fase 2 - Generación de contenido recurrente (atracción y confianza)
-8. Armar calendario de contenido para Instagram (Reels, historias, encuestas, glosario, preguntas)
-9. Lanzar los primeros reels/tips educativos para atraer tráfico orgánico
-10. Implementar newsletter semanal (resumen de mercado + tip educativo + CTA a servicio)
-11. Crear y publicar mini-tutoriales educativos (breves, simples: lectura de balance, TradingView, ratios, etc.)
-12. Empezar a responder preguntas frecuentes de la comunidad (Instagram, email, WhatsApp)
+✅ Checklist Prioritario Impulso Merval – Captación y Conversión
+Revisar por qué se para el bot en la VM y hay diferencia con su reloj
+Implementar bot de palabra clave “ALTA” que envíe el link de pago
+Fijar mensaje en el grupo trial con reglas y link de pago
+Limpiar el grupo de Alertas y fijar reglas y FAQ
+Integrar Zapier/Make con Google Sheets para registrar leads y estado (Trial / Activo / Churn)
+Configurar Google Analytics 4 y Meta Pixel en la landing y la página de gracias
+Construir un cuadro de mando de métricas clave: leads, % al grupo, % pago día 7, churn
+Programar newsletter semanal con resumen de mercado, tip educativo y CTA al grupo
+Subir historia de WhatsApp con testimonio real
+Subir historia de WhatsApp con CTA al plan pago
+Activar Catálogo de WhatsApp Business (evaluar utilidad)
+Publicar historias de WhatsApp semanales con testimonio y CTA de pago (evaluar utilidad)
+Optimizar la página de gracias con botón al grupo ✅
+Optimizar la página de gracias con botón para descargar la guía ✅
+Hacer encuesta rápida a tus clientes sobre curso básico
+Diseñar el esqueleto del curso básico de inversiones y validarlo
+Elegir plataforma low-cost (Hotmart o Gumroad) e integrarla al Catálogo
+Configurar secuencia de mails post-curso para upsell a membresía premium
+Desarrollar la web completa con blog, SEO y área miembros
+Lanzar canal de YouTube con clips de 3-5 min
+Diseñar flujo de recuperación de inactivos con emails y retargeting
+Una vez tenga leads: ¿a qué día le hablo por WhatsApp o cuándo enviar mensaje?
+¿Qué hacer si el lead no se suscribe?
+Crear formulario tipo “quiero empezar” para leads nuevos
+Enviar mensaje personalizado a leads que no pagaron
+Dejar fijo un mensaje de bienvenida en grupo de preba
 
-## 🔥 Fase 3 - Validación del embudo y primeras pruebas pagas
-13. Definir y testear campaña de ads en Instagram (bajo presupuesto para captar leads al lead magnet)
-14. Medir conversión del embudo completo (descarga ➔ prueba ➔ suscripción)
-15. Ajustar mensajes, copies y landings según resultados iniciales
-
-## 🔥 Fase 4 - Expansión de producto y automatización
-16. Desarrollar el primer Producto Educativo grabado (curso básico de inversiones)
-17. Definir estrategia de venta de cursos:
-    - Formato (grabado, micro cursos)
-    - Plataforma (Hotmart, Gumroad, web propia)
-18. Automatizar mensajes de educación y venta vía WhatsApp Business
-19. Optimizar automatizaciones backend (cobros, seguimientos, CRM simple, etc)
-
-## 🔥 Fase 5 - Escalamiento y diversificación
-20. Desarrollar y lanzar la página web completa (blog, recursos, cursos, suscripción, contacto)
-21. Profundizar el uso de WhatsApp Business (historias, catálogo, preguntas frecuentes, automatizaciones)
-22. Evaluar sumar nuevos canales (YouTube, TikTok, Discord, twitter X,o foro)
-23. Implementar estrategia de recuperación de clientes inactivos (email marketing)
-
-## 🔥 Fase 6 - Optimización continua
-24. Mejorar estética y profundidad de informes sectoriales y carteras
-25. Analizar SEO para blog o web educativa
-26. Analizar performance de los distintos canales pagos vs orgánicos (ads, SEO, redes)
-27. Auditar periódicamente procesos de membresía y retención
-
----
-
-## ¿Qué es Impulso Merval?
+## 1. ¿Qué es Impulso Merval?
 
 Impulso Merval es un servicio de información y educación financiera para personas con pocos conocimientos, que quieren entender mejor el mercado y tomar decisiones informadas.
 
@@ -62,9 +63,8 @@ Impulso Merval es un servicio de información y educación financiera para perso
 
 ## ¿Cómo funciona?
 
-El servicio se entrega vía WhatsApp en un grupo exclusivo donde solo hablan los administradores. Tiene un modelo de membresía mensual paga, con 50 clientes pagando \$7.500 por mes, cobrados por MercadoPago.
-
-Clientes que invierten pueden designarnos como asesores en plataformas reconocidas (Bullmarket, IOL, Balanz). De la comisión que pagan (ej: \$7 por operación), el 50% nos lo abona la plataforma, generando ingresos adicionales sin costo extra para el cliente.
+- **Membresía WhatsApp**: ARS \$7 500/mes · 50 clientes activos
+- **Ingresos extra**: acuerdo de asesor designado (Bullmarket, IOL, Balanz) ±50 % de la comisión del broker, sin costo adicional para el cliente
 
 ## Objetivo
 
@@ -72,6 +72,17 @@ Democratizar el acceso a la información financiera, crear una comunidad que mej
 
 ---
 
+## 2. Activos digitales
+
+| Canal         | Estado     | Observaciones                                       |
+| ------------- | ---------- | --------------------------------------------------- |
+| **Web**       | MVP online | Hero + CTA “Prueba 7 días” + formulario → envía PDF |
+| **Instagram** | Dormido    | Falta calendario y línea gráfica estable            |
+| **WhatsApp**  | Activo     | Grupo pago + grupo trial                            |
+| **Email**     | Parcial    | Secuencia D0/D2/D6/D7 + newsletter en preparación   |
+| **LinkTree**  | Activo     | Links a prueba gratis, IG, contacto                 |
+
+---
 ## Fortalezas
 
 - Marca y reputación sólida: 50 clientes activos y branding validado.
@@ -98,26 +109,24 @@ Democratizar el acceso a la información financiera, crear una comunidad que mej
 ---
 
 ## Página Web
-
-- Descargar Mini-glosario gratuito a cambio de email.
-- También disponible en Linktree (PDF o link).
+- www.impulsomerval.com
+- Inicio - Herramientas (Cotizaciones dolar y Noticias) - Servicios (Cursos y SeMiembro)
+- Objetivo captar leads, tiene un hero grande con un boton de prueba gratuita 7 dias (Se abre form completan Nombre completo, mail, whatsapp). Se les envia un mail de bienvenida con un pdf.
 
 ## Instagram
-
-- Compartir el mismo lead magnet.
+- @impulsomerval
+Pendiente terminar de definir el calendario.
 
 ## Email Marketing – Estrategia Inicial
-
-- Newsletter web: resumen del mercado + tip educativo + link al servicio + pregunta final.
 - Lead Magnet:
-  - Día 0: envío del PDF
+  - Día 0: Bienvenida envío del PDF e invitacion al grupo
   - Día 3: oferta de prueba gratuita
   - Día 7: último recordatorio
+  - Newsletter web: ?????
 
 ### Objetivo del lead magnet
 
 Personas interesadas en invertir que aún no conocen el servicio. Querés que:
-
 - Lo descarguen
 - Prueben gratis el grupo
 - Te sigan en redes (segunda página de gracias)
@@ -131,28 +140,29 @@ Personas interesadas en invertir que aún no conocen el servicio. Querés que:
 
 ## Calendario Tipo – Email / WhatsApp
 
-| Día             | A quién   | Qué enviar                                  |
-| --------------- | --------- | ------------------------------------------- |
-| Lunes sem. 1    | Todos     | Newsletter con resumen + tip + CTA WhatsApp |
-| Día suscripción | Leads PDF | Mail con PDF + invitación                   |
-| Día 3           | Leads PDF | “¿Lo viste?” + oferta prueba gratuita       |
-| Día 7           | Leads PDF | Último recordatorio                         |
-| Último día mes  | Clientes  | Análisis exclusivo o planilla               |
+No tengo implementada la Newsletter aún
+
+| Día             | A quién| Qué enviar                                  |
+| --------------- | -------| ------------------------------------------- |
+| Lunes sem. 1    | Todos  | Newsletter con resumen + tip + CTA WhatsApp | ¿Porque se lo deberia mandar a todos? ¿Que mando?
+| Día suscripción | Leads  | Mail con PDF + invitación                   | Automatizado
+| Día 3           | Leads  | “¿Lo viste?” + oferta prueba gratuita       | Automatizado
+| Día 7           | Leads  | Último recordatorio                         | Automatizado
+| Día 9           | Leads  | 7 dias gratis mas?                          | Pendiente
+| Día 12          | Leads  | Saludarlo y feedback                        | Pendiente
 
 ---
 
 ## LinkTree
-
 - Prueba gratis
 - Instagram
 - Contacto
-- Web (pendiente)
-- Lead magnet (pendiente)
+- Web
+- Lead magnet
 
 ---
 
 ## Ideas de Contenido Semanal
-
 1. **Dato Curioso de la Semana**: historias de empresas, índices o conceptos.
 2. **Mini Glosario Financiero**: concepto explicado simple.
 3. **Empresa para Mirar**: perfil breve sin recomendación.
@@ -168,22 +178,26 @@ Personas interesadas en invertir que aún no conocen el servicio. Querés que:
 
 ---
 
-# Calendario de Contenidos Impulso Merval
+# Calendario de Contenidos · Impulso Merval
 
-| 📅 Día/Frecuencia       | 📌 Pilar                  | 📦 Contenido                                                                                  |
-|------------------------|---------------------------|----------------------------------------------------------------------------------------------|
-| 🗓️ Lunes a Viernes      | 🗞️ Resumen diario          | - Saludo breve<br>- Panorama macro, índices, materias primas, criptos, tasas<br>- Mayores movimientos de acciones<br>- Cotizaciones del dólar (MEP, CCL, Blue) |
-| 🗓️ Martes              | 🛎️ Resumen de alertas      | - Compilado de las alertas enviadas recientemente (zona, stop, objetivos)                     |
-| 🗓️ Miércoles           | 📚 Pilar educativo         | - Mini clase (audio, texto, PDF o video corto)                                               |
-| 🗓️ Viernes             | ❓ Consultas y recordatorios| - “Viernes de consultas” (responder dudas de la comunidad)<br>- Recordatorio de tasas de caución |
-| 📅 1ª semana del mes    | 💼 Cartera mensual         | - PDF o post con análisis y estrategia de cartera recomendada                                |
-| 📅 Semanas 2, 3 y 4    | 🧾 Informe sectorial       | - Análisis detallado por sector: tecnológicas, farmacéuticas, energía, renta fija, etc.      |
-| ⚠️ Cuando sea necesario | 🔔 Alertas de oportunidad  | - Alerta de compra puntual<br>- Análisis breve                                              |
-| 📅 Según calendario     | 📢 Recordatorios clave     | - Feriados en BYMA y NYSE<br>- Vencimiento de opciones                                       |
+| 📅 Día/Frecuencia        | 📌 Pilar                   | 📦 Contenido                                                                                                                                                                           | ⚙️ Automatizado |
+|--------------------------|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
+| Lunes a Viernes          | 🗞️ Resumen diario          | - Saludo breve (09:00)<br>- Panorama macro / índices / materias primas / criptos / tasas (09:05)<br>- Mayores movimientos de acciones (09:10)<br>- Alertas de oportunidad (11:00)<br>- Reporte de alertas (12:00)<br>- Cotizaciones del dólar (15:00) | **Sí** |
+| Lunes a Viernes          | 📰 Resumen de noticias     | - Titulares destacados del día                                                                                                                                                        | **Pendiente** |
+| Martes                   | 🛎️ Resumen de alertas      | - Compilado de alertas recientes (zona, stop, objetivos)                                                                                                                              | **Sí** |
+| Martes                   | 💬 Mensaje motivacional    | - Frase o tip breve para mantener el foco (15:50)                                                                                                                                      | **Sí** |
+| Martes                   | 🎁 Invitá a un amigo       | - Promo “1 mes gratis” por referido (19:00)                                                                                                                                            | **Sí** |
+| Miércoles                | 📚 Pilar educativo         | - Mini clase (audio, texto, PDF o video corto) (15:30)                                                                                                                                | **Sí** |
+| Viernes                  | ❓ Consultas & caución      | - “Viernes de consultas” (15:40)<br>- Recordatorio de tasas de caución                                                                                                                | **Sí** |
+| 1.ª semana del mes       | 💼 Cartera mensual         | - PDF/post con estrategia de cartera recomendada                                                                                                                                       | **No** |
+| Semanas 2-3-4            | 🧾 Informe sectorial       | - Análisis por sector (tech, pharma, energía, renta fija, etc.)                                                                                                                       | **No** |
+| Cuando sea necesario     | 🔔 Alertas puntuales       | - Alerta de compra puntual + análisis breve                                                                                                                                            | **Sí** |
+| Según calendario         | 📢 Recordatorios clave     | - Aviso de feriados BYMA/NYSE (12:20)<br>- Vencimiento de opciones, 3.º jueves (12:30)                                                                                                | **Sí** |
+Encuesta de que contenido les es mas util ?
 
 ---
 
-# Calendario de Contenidos Instagram Impulso Merval (Optimizado 100% Programable)
+# Calendario de Contenidos Instagram Impulso Merval (Optimizado 100% Programable) PENDIENTE
 
 | 📅 Día/Frecuencia | 📌 Pilar | 📦 Contenido |
 |-------------------|----------|--------------|
@@ -196,7 +210,7 @@ Personas interesadas en invertir que aún no conocen el servicio. Querés que:
 | 📅 Permanente | 🔗 Captación directa | Destacado "Empieza aquí": propuesta de valor + CTA WhatsApp/DM |
 
 
-# ⚡ Embudo Impulso Merval v2.1  
+# ⚡ Embudo Impulso Merval v2.1  (Completado el D0 D2 D6, tengo la pagina y el thankyou) no tengo anuncios. Me falta el retargeting si no paga al dia 7
 *“del anuncio al pago en 7 días”*
 Ads ➜ Landing ➜ Thank-You ➜ Grupo WA (7 d) ➜ Pago
 | Paso | Qué ocurre | CTA clave |
@@ -204,7 +218,7 @@ Ads ➜ Landing ➜ Thank-You ➜ Grupo WA (7 d) ➜ Pago
 | **1. Anuncio**<br>IG · FB · Google | “Invertí 🇦🇷 en 5 min/día  •  7 d GRATIS + PDF” | **Probar gratis** |
 | **2. Landing** | Formulario → **Nombre + Email + WhatsApp**  <br>Checkbox consentimiento ↗ | **Quiero mis 7 días** |
 | **3. Thank-You** *(2 pasos)* | ① Descargá PDF 📥 <br>② Entrá al grupo 💬 (deep-link WA) | **Entrar al grupo** |
-| **4. Automatización** | **D0** Mail/WA: PDF + link grupo <br>**D2** Mail: tip CEDEAR 60 s + «Seguinos en IG» <br>**D5** WA: encuesta ✔/✘ → Si ✔ link plan pago <br>**D7** Mail/WA: «Último día» + botón **Activar membresía $7 500** | **Activar membresía** |
+| **4. Automatización** | **D0** Mail/WA: PDF + link grupo <br>**D2** Mail: tip CEDEAR 60 s + «Seguinos en IG» <br>**D6** WA: encuesta ✔/✘ → Si ✔ link plan pago <br>**D7** Mail/WA: «Último día» + botón **Activar membresía $7 500** | **Activar membresía** |
 | **5. Grupo WA (trial)** | Mensaje fijado = reglas + link MercadoPago <br>D6 testimonio + oferta «Congelá precio hoy» <br>Bot palabra **ALTA** ⇒ checkout | **ALTA** |
 ---
 ### 🗝️ Notas rápidas
