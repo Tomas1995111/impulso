@@ -19,7 +19,7 @@ from mensajes.mensajeIndices import generar_mensaje_indices
 
 # Ruta base del proyecto
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-log_path = os.path.join(BASE_DIR, "log_envioWhatsapp.log")
+log_path = os.path.join(BASE_DIR, "log_bot.log")
 
 # Configurar logging
 logging.basicConfig(
@@ -277,63 +277,70 @@ logging.info("Bot iniciado correctamente.")
 
 ultima_hora_procesada = None
 
-while True:
-    ahora = datetime.datetime.now()
-    print(f"⌛ Revisión: {ahora.strftime('%d/%m/%Y %H:%M:%S')}")
-    pyautogui.moveRel(1, 0, duration=0.1)
-    pyautogui.moveRel(-1, 0, duration=0.1)
-    dia_actual = ahora.strftime("%A").lower()
-    hora_actual = ahora.strftime("%H:%M")
-    fecha_actual = ahora.strftime("%d/%m/%Y %H:%M")
+try:
+    while True:
+        ahora = datetime.datetime.now()
+        print(f"⌛ Revisión: {ahora.strftime('%d/%m/%Y %H:%M:%S')}")
+        logging.info(f"⌛ Revisión: {ahora.strftime('%d/%m/%Y %H:%M:%S')}")
+        pyautogui.moveRel(1, 0, duration=0.1)
+        pyautogui.moveRel(-1, 0, duration=0.1)
+        dia_actual = ahora.strftime("%A").lower()
+        hora_actual = ahora.strftime("%H:%M")
+        fecha_actual = ahora.strftime("%d/%m/%Y %H:%M")
 
-    if hora_actual == ultima_hora_procesada:
-        time.sleep(1)
-        continue
+        if hora_actual == ultima_hora_procesada:
+            time.sleep(1)
+            continue
 
-    for item in mensajes_semana:
-        if dia_actual in item["dias"] and hora_actual == item["hora"]:
-            mensaje_final = ""
-            if item["mensaje"] == "cotizacion_dolar":
-                mensaje_final = generar_cotizacion_dolar()
-            elif item["mensaje"] == "noticia_mercado":
-                mensaje_final = generar_mensaje_resumen()
-            elif item["mensaje"] == "alerta_bursatil":
-                mensaje_final = generar_alerta_aleatoria()
-            elif item["mensaje"] == "alerta_bursatil_arg":
-                mensaje_final = generar_alerta_aleatoria_arg()
-            elif item["mensaje"] == "resumen_indices":
-                mensaje_final = generar_mensaje_indices()
-            elif item["mensaje"] == "reporte_google_sheet":
-                try:
-                    subprocess.run([sys.executable, "mensajes/reporteAlertas.py"], check=True)
-                    mensaje_final = f"📈 *Reporte actualizado - {fecha_actual}* | 📊 *Resumen de Alertas* 👉 https://docs.google.com/spreadsheets/d/1Z9gfXGPdhBktLMwAIj4KpJ5SI2hDKK5lXG2Z63DaMSI/edit?usp=sharing"
-                except Exception as e:
-                    mensaje_final = f"[!] Error al generar reporte: {e}"
-            else:
-                mensaje_final = item["mensaje"]
+        for item in mensajes_semana:
+            if dia_actual in item["dias"] and hora_actual == item["hora"]:
+                mensaje_final = ""
+                if item["mensaje"] == "cotizacion_dolar":
+                    mensaje_final = generar_cotizacion_dolar()
+                elif item["mensaje"] == "noticia_mercado":
+                    mensaje_final = generar_mensaje_resumen()
+                elif item["mensaje"] == "alerta_bursatil":
+                    mensaje_final = generar_alerta_aleatoria()
+                elif item["mensaje"] == "alerta_bursatil_arg":
+                    mensaje_final = generar_alerta_aleatoria_arg()
+                elif item["mensaje"] == "resumen_indices":
+                    mensaje_final = generar_mensaje_indices()
+                elif item["mensaje"] == "reporte_google_sheet":
+                    try:
+                        subprocess.run([sys.executable, "mensajes/reporteAlertas.py"], check=True)
+                        mensaje_final = f"📈 *Reporte actualizado - {fecha_actual}* | 📊 *Resumen de Alertas* 👉 https://docs.google.com/spreadsheets/d/1Z9gfXGPdhBktLMwAIj4KpJ5SI2hDKK5lXG2Z63DaMSI/edit?usp=sharing"
+                    except Exception as e:
+                        mensaje_final = f"[!] Error al generar reporte: {e}"
+                else:
+                    mensaje_final = item["mensaje"]
 
-            if "[!]" in mensaje_final:
-                print(mensaje_final)
-            else:
+                if "[!]" in mensaje_final:
+                    print(mensaje_final)
+                    logging.info(mensaje_final)
+                else:
+                    grupos_destino = item.get("grupo", nombre_grupo)
+                    if not isinstance(grupos_destino, list):
+                        grupos_destino = [grupos_destino]
+                    if "grupo_backup" in globals() and grupo_backup not in grupos_destino:
+                        grupos_destino.append(grupo_backup)
+                    for grupo in grupos_destino:
+                        enviar_mensaje(mensaje_final, grupo=grupo)
+
+        for item in mensajes_fecha:
+            if fecha_actual == item["fecha"]:
                 grupos_destino = item.get("grupo", nombre_grupo)
                 if not isinstance(grupos_destino, list):
                     grupos_destino = [grupos_destino]
                 if "grupo_backup" in globals() and grupo_backup not in grupos_destino:
                     grupos_destino.append(grupo_backup)
                 for grupo in grupos_destino:
-                    enviar_mensaje(mensaje_final, grupo=grupo)
+                    enviar_mensaje(item["mensaje"], grupo=grupo)
 
-    for item in mensajes_fecha:
-        if fecha_actual == item["fecha"]:
-            grupos_destino = item.get("grupo", nombre_grupo)
-            if not isinstance(grupos_destino, list):
-                grupos_destino = [grupos_destino]
-            if "grupo_backup" in globals() and grupo_backup not in grupos_destino:
-                grupos_destino.append(grupo_backup)
-            for grupo in grupos_destino:
-                enviar_mensaje(item["mensaje"], grupo=grupo)
+        ultima_hora_procesada = hora_actual
 
-    ultima_hora_procesada = hora_actual
+        while datetime.datetime.now().strftime("%H:%M") == hora_actual:
+            time.sleep(0.5)
 
-    while datetime.datetime.now().strftime("%H:%M") == hora_actual:
-        time.sleep(0.5)
+except Exception as e:
+    logging.error(f"❌ Error en loop principal: {e}")
+    print(f"❌ Error en loop principal: {e}")
