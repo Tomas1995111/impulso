@@ -2,11 +2,10 @@
 import pywhatkit
 import pyautogui
 import pyperclip
-import datetime
+from datetime import datetime  # ✅ queda solo esta importación
 import ctypes
 import time
 import subprocess
-import logging
 import os
 import sys
 
@@ -17,16 +16,36 @@ from mensajes.mensajeAlertaCompra import generar_alerta_aleatoria
 from mensajes.mensajeAlertaCompraArg import generar_alerta_aleatoria_arg
 from mensajes.mensajeIndices import generar_mensaje_indices
 
-# Ruta base del proyecto
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-log_path = os.path.join(BASE_DIR, "log_bot.log")
+# Ruta del log
+log_path = r"Z:\Proyectos\impulso_wsp_bot\LogVM\log_bot.log"
 
-# Configurar logging
-logging.basicConfig(
-    filename=log_path,
-    level=logging.INFO,
-    format='%(asctime)s %(message)s'
-)
+# 🧹 Limpia el log si pesa más de 10 MB
+def limpiar_log_si_pesa(path, max_mb=10, ultimas_lineas=1000):
+    try:
+        if os.path.getsize(path) > max_mb * 1024 * 1024:
+            with open(path, "r", encoding="utf-8", errors="ignore") as f:
+                lineas = f.readlines()[-ultimas_lineas:]
+            with open(path, "w", encoding="utf-8") as f:
+                f.writelines(lineas)
+            escribir_log("Log limpiado (>{}MB, {} líneas conservadas).".format(max_mb, ultimas_lineas), "limpieza")
+    except Exception as e:
+        escribir_log(f"Error al limpiar log: {e}", "error")
+
+# ✍️ Logger personalizado
+def escribir_log(mensaje, tipo="info"):
+    icono = {
+        "info": "ℹ️",
+        "ok": "✅",
+        "error": "❌",
+        "revisión": "⏳",
+        "limpieza": "🧹",
+        "envio": "📤"
+    }.get(tipo, "")
+    timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
+    linea = f"{timestamp} {icono} {mensaje}\n"
+    with open(log_path, "a", encoding="utf-8") as f:
+        f.write(linea)
+    print(linea.strip())
 
 # Evita que la PC suspenda mientras corre el bot
 ES_CONTINUOUS = 0x80000000
@@ -255,8 +274,7 @@ mensajes_fecha = [
 def enviar_mensaje(texto, grupo=None):
     try:
         destino = grupo if grupo else nombre_grupo
-        print(f"🔔 Enviando mensaje a {destino}: {texto}")
-        logging.info(f"Enviando mensaje a {destino}: {texto}") 
+        escribir_log(f"Enviando mensaje a {destino}: {texto}", "envio")
 
         pywhatkit.sendwhatmsg_to_group_instantly(destino, "", wait_time=15, tab_close=False)
         time.sleep(7)
@@ -269,19 +287,17 @@ def enviar_mensaje(texto, grupo=None):
         time.sleep(3)
         pyautogui.hotkey("ctrl", "w")
     except Exception as e:
-        logging.error(f"[!] Error enviando a {grupo}: {e}")
-        print(f"[!] Error enviando a {grupo}: {e}")
+        escribir_log(f"Error enviando a {grupo}: {e}", "error")
 
-print("Bot iniciado. Esperando el horario correcto...")
-logging.info("Bot iniciado correctamente.")
+escribir_log("Bot iniciado correctamente.", "ok")
 
 ultima_hora_procesada = None
 
 try:
     while True:
-        ahora = datetime.datetime.now()
-        print(f"⌛ Revisión: {ahora.strftime('%d/%m/%Y %H:%M:%S')}")
-        logging.info(f"⌛ Revisión: {ahora.strftime('%d/%m/%Y %H:%M:%S')}")
+        limpiar_log_si_pesa(log_path)
+        ahora = datetime.now()
+        escribir_log(f"Revisión: {ahora.strftime('%d/%m/%Y %H:%M:%S')}", "revisión")
         pyautogui.moveRel(1, 0, duration=0.1)
         pyautogui.moveRel(-1, 0, duration=0.1)
         dia_actual = ahora.strftime("%A").lower()
@@ -315,8 +331,7 @@ try:
                     mensaje_final = item["mensaje"]
 
                 if "[!]" in mensaje_final:
-                    print(mensaje_final)
-                    logging.info(mensaje_final)
+                    escribir_log(mensaje_final, "error")
                 else:
                     grupos_destino = item.get("grupo", nombre_grupo)
                     if not isinstance(grupos_destino, list):
@@ -338,9 +353,8 @@ try:
 
         ultima_hora_procesada = hora_actual
 
-        while datetime.datetime.now().strftime("%H:%M") == hora_actual:
+        while datetime.now().strftime("%H:%M") == hora_actual:  # ✅ corregido acá
             time.sleep(0.5)
 
 except Exception as e:
-    logging.error(f"❌ Error en loop principal: {e}")
-    print(f"❌ Error en loop principal: {e}")
+    escribir_log(f"Error en loop principal: {e}", "error")

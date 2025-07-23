@@ -18,9 +18,6 @@ Hacer historia evergreen: “3 errores comunes alinvertir”
 Hacer historia evergreen: “Cómo empezar en la bolsa
 Promocionar guía gratuita en historia con swipe up o link
 Subir reel respondiendo una duda frecuente
-
-✅ Checklist Prioritario Impulso Merval – Captación y Conversión
-Revisar por qué se para el bot en la VM y hay diferencia con su reloj
 Implementar bot de palabra clave “ALTA” que envíe el link de pago
 Fijar mensaje en el grupo trial con reglas y link de pago
 Limpiar el grupo de Alertas y fijar reglas y FAQ
