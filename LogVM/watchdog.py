@@ -4,7 +4,7 @@ import subprocess
 
 # 🕒 Variables de tiempo
 TIEMPO_INICIAL = 3 * 60
-TIEMPO_ENTRE_REVISIONES = 10 * 60
+TIEMPO_ENTRE_REVISIONES = 12 * 60
 
 # 📄 Rutas
 LOG_BOT_PATH = r"C:\Users\Tomas\OneDrive\Escritorio\Proyectos\impulso_wsp_bot\LogVM\log_bot.log"
