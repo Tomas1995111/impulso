@@ -5,6 +5,9 @@ from selenium.webdriver.common.by import By
 from googlesearch import search
 import time
 
+# Ruta del log
+log_path = r"Z:\Proyectos\impulso_wsp_bot\LogVM\log_bot.log"
+
 def extraer_con_perfil(url, perfil_path):
     options = Options()
     options.add_argument("--disable-gpu")
@@ -15,7 +18,7 @@ def extraer_con_perfil(url, perfil_path):
 
     driver = webdriver.Chrome(options=options)
     driver.get(url)
-    time.sleep(10)
+    time.sleep(25)
 
     paragraphs = driver.find_elements(By.CSS_SELECTOR, "div.group p")
     resultados = []
@@ -48,7 +51,7 @@ def buscar_url_resumen():
     print("No se encontró el artículo")
     return None
 
-def esperar_y_buscar_url(max_espera_min=100, intervalo_min=5): #intervalo_min
+def esperar_y_buscar_url(max_espera_min=100, intervalo_min=5):
     inicio = time.time()
     while (time.time() - inicio) < max_espera_min * 60:
         url = buscar_url_resumen()
@@ -60,7 +63,7 @@ def esperar_y_buscar_url(max_espera_min=100, intervalo_min=5): #intervalo_min
     return None
 
 def generar_mensaje_resumen():
-    url = esperar_y_buscar_url()  # Reintenta hasta 100 minutos, cada 5 minutos
+    url = esperar_y_buscar_url()
     if not url:
         return ""
 
@@ -70,9 +73,18 @@ def generar_mensaje_resumen():
     resultados_ingles = extraer_con_perfil(url, perfil1)
     resultados_traducido = extraer_con_perfil(url, perfil2)
 
+    # ✅ Validación: si no hay resultados, log + return vacío
+    if not resultados_ingles or not resultados_traducido:
+        mensaje_log = f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ⚠️ No se generó mensajeResumen por falta de datos extraídos.\n"
+        print(mensaje_log.strip())
+        with open(log_path, "a", encoding="utf-8") as f:
+            f.write(mensaje_log)
+        return ""
+
     mensaje = "📊 *Mayores movimientos de acciones* 📊\n\n"
     for i, (titulo, _) in enumerate(resultados_ingles):
         contenido = resultados_traducido[i][1] if i < len(resultados_traducido) else "(sin contenido)"
         mensaje += f"🔹 {titulo}:\n{contenido}\n\n"
 
     return mensaje.strip()
+

@@ -59,17 +59,17 @@ grupo_backup = "FY8RiMYYdnQ1UJf1ItXbe1"
 # nombre_grupo = "I22BQXw1eO45eh2ee83WuZ" #Grupo Test
 
 mensajes_semana = [
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:00", "mensaje": "💪 *Muy buenos días, Impulsores.*\nHoy es una nueva oportunidad para seguir creciendo juntos.\nLes compartimos el impulso del mercado para seguir siempre un paso adelante."},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:05", "mensaje": "resumen_indices"},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:10", "mensaje": "noticia_mercado"},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:00", "mensaje": "💪 *Muy buenos días, Impulsores.*\nHoy es una nueva oportunidad para seguir creciendo juntos.\nLes compartimos el impulso del mercado para seguir siempre un paso adelante.", "grupo": ["LDHlzsldWl2B03bfRnVNA9", "IQRao9TEvSg5H7xO8736Ku"]},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:05", "mensaje": "resumen_indices", "grupo": ["LDHlzsldWl2B03bfRnVNA9", "IQRao9TEvSg5H7xO8736Ku"]},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "09:10", "mensaje": "noticia_mercado", "grupo": ["LDHlzsldWl2B03bfRnVNA9", "IQRao9TEvSg5H7xO8736Ku"]},
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:00", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:05", "mensaje": "alerta_bursatil", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:10", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "11:15", "mensaje": "alerta_bursatil_arg", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
     {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "12:00", "mensaje": "reporte_google_sheet", "grupo": "EfwcuD1Yj9QC7nHQSN9TdT"},
-    # {"dias": ["sunday"], "hora": "03:50", "mensaje": "💰 *¡TEST!*", "grupo": ["I22BQXw1eO45eh2ee83WuZ", "EhvM2RB1GalGa3OZll2bVW"]},
-    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "15:00", "mensaje": "cotizacion_dolar"},
-    {"dias": ["friday"], "hora": "13:30", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*"},
+    # {"dias": ["sunday"], "hora": "03:50", "mensaje": "💰 *¡TEST!*", "grupo": ["EfwcuD1Yj9QC7nHQSN9TdT", "IQRao9TEvSg5H7xO8736Ku"]},
+    {"dias": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hora": "15:00", "mensaje": "cotizacion_dolar", "grupo": ["LDHlzsldWl2B03bfRnVNA9", "IQRao9TEvSg5H7xO8736Ku"]},
+    {"dias": ["friday"], "hora": "13:30", "mensaje": "💰 *¡No te olvides de caucionar lo líquido este finde semana!*", "grupo": ["LDHlzsldWl2B03bfRnVNA9", "IQRao9TEvSg5H7xO8736Ku"]},
     {"dias": ["tuesday"], "hora": "19:00", "mensaje": "🎁 *¡Invitá a un amigo y ganan los dos!*\n\nSi alguien se suscribe con este link 👇\nhttps://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380847596cf970175ae9482893205\n*y nos dice que vos lo invitaste*, te bonificamos *tu próximo pago* 💸\n\n👥 *¿Cómo funciona?*\n1️⃣ Compartí el link con quien creas que le puede servir\n2️⃣ Cuando se sume, que nos escriba: *\"Me invitó Juan\"*\n3️⃣ ¡Ambos reciben *30 días gratis*!\n\n📩 *Ante cualquier duda, escribime por privado.*"},
 ]
 
