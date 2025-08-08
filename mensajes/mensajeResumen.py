@@ -8,6 +8,11 @@ import time
 # Ruta del log
 log_path = r"Z:\Proyectos\impulso_wsp_bot\LogVM\log_bot.log"
 
+def _log_line(msg: str):
+    linea = f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {msg}\n"
+    with open(log_path, "a", encoding="utf-8") as f:
+        f.write(linea)
+
 def extraer_con_perfil(url, perfil_path):
     options = Options()
     options.add_argument("--disable-gpu")
@@ -53,12 +58,18 @@ def buscar_url_resumen():
 
 def esperar_y_buscar_url(max_espera_min=100, intervalo_min=5):
     inicio = time.time()
+    intento = 0
     while (time.time() - inicio) < max_espera_min * 60:
+        intento += 1
         url = buscar_url_resumen()
         if url:
+            _log_line(f"✅ Artículo encontrado en el intento #{intento}: {url}")
             return url
+        # Log de reintento
+        _log_line(f"❌ No se encontró el artículo (intento #{intento}). Reintentando en {intervalo_min} minutos...")
         print(f"No se encontró. Reintentando en {intervalo_min} minutos...\n")
         time.sleep(intervalo_min * 60)
+    _log_line("⏳ Tiempo máximo de espera alcanzado. No se encontró la URL.")
     print("⏳ Tiempo máximo de espera alcanzado. No se encontró la URL.")
     return None
 
@@ -87,4 +98,3 @@ def generar_mensaje_resumen():
         mensaje += f"🔹 {titulo}:\n{contenido}\n\n"
 
     return mensaje.strip()
-
