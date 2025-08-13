@@ -23,7 +23,7 @@ def extraer_con_perfil(url, perfil_path):
 
     driver = webdriver.Chrome(options=options)
     driver.get(url)
-    time.sleep(25)
+    time.sleep(60)
 
     paragraphs = driver.find_elements(By.CSS_SELECTOR, "div.group p")
     resultados = []
